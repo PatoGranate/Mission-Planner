@@ -50,40 +50,42 @@ def target_pointer(satA, satB, times, tolerance):
     cross_dist = get_cross_dist(satA, satB, times, tolerance)
     
     closest_approach_dist = tolerance
-    closest_approach_time = runs[0][0]
-    for i in range(runs[0][2]):
-        current_dist = cross_dist[runs[0][0]+i]
-        if current_dist < closest_approach_dist:
-            closest_approach_dist = current_dist
-            closest_approach_time = runs[0][0] + i
-            
-    eciA = satA.propagate(times)
-    eciB = satB.propagate(times)
-    
-    observer_pos = eciA[closest_approach_time]
-    target_pos = eciB[closest_approach_time]
-    
-    target_vector = Vector3D(float(target_pos[0] - observer_pos[0]),
-                             float(target_pos[1] - observer_pos[1]),
-                             float(target_pos[2] - observer_pos[2]))
-    
-    target_vector_mag = target_vector.getNorm()
-    b3_unit = target_vector.scalarMultiply(1/target_vector_mag)
-    
-    vel = satA.get_vels(times)
-    vec_vel = Vector3D(float(vel[closest_approach_time,0]),
-                       float(vel[closest_approach_time,1]),
-                       float(vel[closest_approach_time,2]))
-    
-    b1 = vec_vel.subtract(b3_unit.scalarMultiply(vec_vel.dotProduct(b3_unit)))
-    b1_unit = b1.scalarMultiply(1/b1.getNorm())
-    
-    b2_unit = b3_unit.crossProduct(b1_unit)
-    
-    DCM_b2e = np.array([(b1_unit.x, b1_unit.y, b1_unit.z), 
-                        (b2_unit.x, b2_unit.y, b2_unit.z), 
-                        (b3_unit.x, b3_unit.y, b3_unit.z)])
-    
-    quat = R.from_matrix(DCM_b2e).as_quat()
-    
-    return quat
+    if len(runs) != 0:
+        print(runs)
+        closest_approach_time = runs[0][0]
+        for i in range(runs[0][2]):
+            current_dist = cross_dist[runs[0][0]+i]
+            if current_dist < closest_approach_dist:
+                closest_approach_dist = current_dist
+                closest_approach_time = runs[0][0] + i
+                
+        eciA = satA.propagate(times)
+        eciB = satB.propagate(times)
+        
+        observer_pos = eciA[closest_approach_time]
+        target_pos = eciB[closest_approach_time]
+        
+        target_vector = Vector3D(float(target_pos[0] - observer_pos[0]),
+                                 float(target_pos[1] - observer_pos[1]),
+                                 float(target_pos[2] - observer_pos[2]))
+        
+        target_vector_mag = target_vector.getNorm()
+        b3_unit = target_vector.scalarMultiply(1/target_vector_mag)
+        
+        vel = satA.get_vels(times)
+        vec_vel = Vector3D(float(vel[closest_approach_time,0]),
+                           float(vel[closest_approach_time,1]),
+                           float(vel[closest_approach_time,2]))
+        
+        b1 = vec_vel.subtract(b3_unit.scalarMultiply(vec_vel.dotProduct(b3_unit)))
+        b1_unit = b1.scalarMultiply(1/b1.getNorm())
+        
+        b2_unit = b3_unit.crossProduct(b1_unit)
+        
+        DCM_b2e = np.array([(b1_unit.x, b1_unit.y, b1_unit.z), 
+                            (b2_unit.x, b2_unit.y, b2_unit.z), 
+                            (b3_unit.x, b3_unit.y, b3_unit.z)])
+        
+        quat = R.from_matrix(DCM_b2e).as_quat()
+        
+        return quat

@@ -22,11 +22,12 @@ Define a Satellite class, in which we can create satellites and run their
 orbits and propagators.
 """
 class Satellite:
-    def __init__(self, a, e, i, omega, raan, anomaly, epoch, anomaly_type):
+    def __init__(self, a, e, i, omega, raan, anomaly, epoch, anomaly_type, label = "(no label)"):
         self.a, self.e, self.i = a, e, i
         self.omega, self.raan, self.anomaly = omega, raan, anomaly
         self.anomaly_type = anomaly_type
         self.epoch = epoch
+        self.label = label
         
         # KeplarianOrbit is defined once per satellite class and then re-used
         self.orbit = KeplerianOrbit(self.a, self.e, self.i, 
@@ -216,7 +217,7 @@ class Satellite:
         vels = self.get_vels(times)
         quats = np.zeros((len(times), 4))
         
-        if self._cache_quats == None:
+        if self._cache_quats is None:
             for i in range(len(times)):
                 # Calculate the unit vector nadir pointing at t = 0
                 r0 = Vector3D(float(poses[i,0]),
