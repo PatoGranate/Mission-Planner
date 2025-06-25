@@ -220,9 +220,9 @@ class Satellite:
         if self._cache_quats is None:
             for i in range(len(times)):
                 # Calculate the unit vector nadir pointing at t = 0
-                r0 = Vector3D(float(poses[i,0]),
-                              float(poses[i,1]),
-                              float(poses[i,2]))
+                r0 = Vector3D(-float(poses[i,0]),
+                              -float(poses[i,1]),
+                              -float(poses[i,2]))
                 r0_mag = r0.getNorm()
                 b3_unit = r0.scalarMultiply(1/r0_mag)
                 
@@ -239,7 +239,7 @@ class Satellite:
                 # Store vectors in direction cosine matrix from eci to body
                 DCM_b2e = np.array([(b1_unit.x, b1_unit.y, b1_unit.z), 
                                     (b2_unit.x, b2_unit.y, b2_unit.z), 
-                                    (b3_unit.x, b3_unit.y, b3_unit.z)])
+                                    (b3_unit.x, b3_unit.y, b3_unit.z)]).T
                 
                 quat = R.from_matrix(DCM_b2e).as_quat()
                 quats[i] = quat

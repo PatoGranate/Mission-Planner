@@ -45,10 +45,10 @@ sat2 = Satellite(a2, e2, i2, omega2, raan2, anomaly2, common_epoch, anomaly_type
 # Plot variation in cross distance between satellites
 global_tolerance = 3000000
 
-#visualization.plot_ground_tracks([sat1, sat2], times)
-#visualization.plot_orbits([sat1, sat2], times)
-#visualization.plot_cross_sat
+visualization.plot_ground_tracks([sat1, sat2], times)
+visualization.plot_orbits([sat1, sat2], times)
+visualization.plot_cross_sat(sat1, sat2, times, global_tolerance)
 
 #quats = Satellite.get_quats(sat1, times)
 #satellite_utils.target_pointer(sat1, sat2, times, global_tolerance)
-#visualization.animate_sat_attitude(sat1, times)
+visualization.animate_sat_attitude([sat1], times)
