@@ -116,13 +116,7 @@ ax2_1.set_ylabel('Cross-sat distance (m)')
 ax2_1.set_xlim([0, max(times)+1])
 ax2_1.set_ylim(bottom = 0)
 
-"""
-Lo proximo es hacer el orientation y el attitude controller que te diga hacia
-donde tienes que mirar, tendras que seleccionar un satelite observador y otro
-observado. mira el cuaderno que hay preguntas y comentarios que hay que hacer
-"""
-n = 0
 
-Satellite.initial_pointing(sat1)
 
+quats = Satellite.get_quats(sat1, times)
 target_pointer(sat1, sat2, times, global_tolerance)

@@ -5,6 +5,7 @@ from org.orekit.utils import Constants, IERSConventions
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.bodies import OneAxisEllipsoid
 from org.hipparchus.geometry.euclidean.threed import Vector3D
+from scipy.spatial.transform import Rotation as R
 
 """
 Define frames of reference for the coordinate systems, and generate an
@@ -39,16 +40,15 @@ class Satellite:
         
         # Find initial position and velocity for orientation
         state_init = self.orbit.getPVCoordinates(epoch, inertial)
-        self.pos_init = state_init.getPosition()
-        self.vel_init = state_init.getVelocity()
-
         
         # Initialize caches to empty
         self._cache_times = None
         self._cache_poses = None
+        self._cache_vels = None
         self._cache_ecef = None
         self._cache_lla = None
         self._cache_gtc = None
+        self._cache_quats = None
         
         # This will be changed later if updated, useful for keys
         self._version = 0
@@ -96,9 +96,11 @@ class Satellite:
         # Change caches to empty
         self._cache_times = None
         self._cache_poses = None
+        self._cache_vels = None
         self._cache_ecef = None
         self._cache_lla = None
         self._cache_gtc = None
+        self._cache_quats = None
         
         self._version += 1
         
@@ -113,23 +115,33 @@ class Satellite:
         
             # Generate an empty matrix to store positions over time
             poses = np.zeros((len(times), 3))
-            
+            vels = np.zeros((len(times), 3))
             for idx, elapsed in enumerate(times):
                 # Find the positions of the satellite at each timestep and add
                 # each position vector as an entry in the poses matrix
                 current_state = self.propagator.propagate(self.epoch.shiftedBy(float(elapsed)))
                 current_pos = current_state.getPVCoordinates().getPosition()
+                current_vel = current_state.getPVCoordinates().getVelocity()
                 poses[idx, :] = current_pos.getX(), current_pos.getY(), current_pos.getZ()
-              
+                vels[idx, :] = current_vel.getX(), current_vel.getY(), current_vel.getZ()
+            
             # Cache poses and invalidate down-the-line previously cached vars
             self._cache_poses = poses
+            self._cache_vels = vels
             self._cache_ecef = None
             self._cache_lla = None
             self._cache_gtc = None
+            self._cache_quats = None
         
         return self._cache_poses
+    
+    def get_vels(self, times):
+        self.propagate(times)
+        
+        return self._cache_vels
 
-    def glob_to_cart(self, poses, times):
+    def _glob_to_cart(self, times):
+        poses = self.propagate(times)
         # Generate an empty matrix to store positions over time
         ecef_poses = np.zeros((len(times), 3))
         lla_poses = np.zeros((len(times), 3))
@@ -160,7 +172,7 @@ class Satellite:
         poses = self.propagate(times)
         # If no cache for ecef or lla, compute new ones
         if self._cache_ecef is None or self._cache_lla is None:
-            ecef, lla = self.glob_to_cart(poses, times)
+            ecef, lla = self._glob_to_cart(times)
             self._cache_ecef = ecef
             self._cache_lla = lla
             self._cache_gtc = None
@@ -199,20 +211,44 @@ class Satellite:
         return self._cache_gtc
             
     # Define initial pointing for Satellite based on trajectory and anomaly
-    def initial_pointing(self):
-        # Calculate the unit vector nadir pointing at t = 0
-        r0 = self.pos_init
-        r0_mag = r0.getNorm()
-        b3_unit = r0.scalarMultiply(1/r0_mag)
+    def _pointing(self, times):
+        poses = self.propagate(times)
+        vels = self.get_vels(times)
+        quats = np.zeros((len(times), 4))
         
-        # Calculate the unit vector pointing in direction of motion
-        v0 = self.vel_init
-        b1 = v0.subtract(b3_unit.scalarMultiply(v0.dotProduct(b3_unit)))
-        b1_unit = b1.scalarMultiply(1/b1.getNorm())
+        if self._cache_quats == None:
+            for i in range(len(times)):
+                # Calculate the unit vector nadir pointing at t = 0
+                r0 = Vector3D(float(poses[i,0]),
+                              float(poses[i,1]),
+                              float(poses[i,2]))
+                r0_mag = r0.getNorm()
+                b3_unit = r0.scalarMultiply(1/r0_mag)
+                
+                # Calculate the unit vector pointing in direction of motion
+                v0 = Vector3D(float(vels[i,0]),
+                              float(vels[i,1]),
+                              float(vels[i,2]))
+                b1 = v0.subtract(b3_unit.scalarMultiply(v0.dotProduct(b3_unit)))
+                b1_unit = b1.scalarMultiply(1/b1.getNorm())
+                
+                # Calculate remaining third vector
+                b2_unit = b3_unit.crossProduct(b1_unit)
+                
+                # Store vectors in direction cosine matrix from eci to body
+                DCM_b2e = np.array([(b1_unit.x, b1_unit.y, b1_unit.z), 
+                                (b2_unit.x, b2_unit.y, b2_unit.z), 
+                                (b3_unit.x, b3_unit.y, b3_unit.z)])
+                
+                quat = R.from_matrix(DCM_b2e).as_quat()
+                quats[i] = quat
+                
+            self._cache_quats = quats
         
-        # Calculate remaining third vector
-        b2_unit = b3_unit.crossProduct(b1_unit)
+    def get_quats(self, times):
+        self._pointing(times)
+        return self._cache_quats
         
-        print(b2_unit)
+        
         
 #%cd "C:/Users/pelay/OneDrive - University of Bath/Experiences/SuperSharp/Project"
