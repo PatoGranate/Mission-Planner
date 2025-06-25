@@ -1,6 +1,7 @@
 import numpy as np
 import itertools
 from org.hipparchus.geometry.euclidean.threed import Vector3D
+from scipy.spatial.transform import Rotation as R
 
 _cross_cache = {}
 
@@ -66,6 +67,23 @@ def target_pointer(satA, satB, times, tolerance):
                              float(target_pos[1] - observer_pos[1]),
                              float(target_pos[2] - observer_pos[2]))
     
-    b3 = target_vector
+    target_vector_mag = target_vector.getNorm()
+    b3_unit = target_vector.scalarMultiply(1/target_vector_mag)
     
+    vel = satA.get_vels(times)
+    vec_vel = Vector3D(float(vel[closest_approach_time,0]),
+                       float(vel[closest_approach_time,1]),
+                       float(vel[closest_approach_time,2]))
     
+    b1 = vec_vel.subtract(b3_unit.scalarMultiply(vec_vel.dotProduct(b3_unit)))
+    b1_unit = b1.scalarMultiply(1/b1.getNorm())
+    
+    b2_unit = b3_unit.crossProduct(b1_unit)
+    
+    DCM_b2e = np.array([(b1_unit.x, b1_unit.y, b1_unit.z), 
+                        (b2_unit.x, b2_unit.y, b2_unit.z), 
+                        (b3_unit.x, b3_unit.y, b3_unit.z)])
+    
+    quat = R.from_matrix(DCM_b2e).as_quat()
+    
+    return quat
