@@ -239,7 +239,7 @@ class Satellite:
                 # Store vectors in direction cosine matrix from eci to body
                 DCM_b2e = np.array([(b1_unit.x, b1_unit.y, b1_unit.z), 
                                     (b2_unit.x, b2_unit.y, b2_unit.z), 
-                                    (b3_unit.x, b3_unit.y, b3_unit.z)]).T
+                                    (b3_unit.x, b3_unit.y, b3_unit.z)])
                 
                 quat = R.from_matrix(DCM_b2e).as_quat()
                 quats[i] = quat

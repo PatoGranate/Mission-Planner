@@ -85,15 +85,14 @@ def animate_sat_attitude(sat_names, times, interval = 100):
     quats = sat_names[0].get_quats(times)
     rots = R.from_quat(quats)
     DCM_eci2body = rots.as_matrix()
-    DCM_body2eci = DCM_eci2body.transpose(0, 2, 1)
+    DCM_body2eci = rots.as_matrix()
     
     fig, ax = plot_orbits(sat_names, times)
     
     obs_traj = sat_names[0].propagate(times)
     obs_marker = ax.scatter(obs_traj[0,0], obs_traj[0,1], obs_traj[0,2], 
                             s = 50, label = sat_names[0].label)
-    
-    
+
     
     quiver = ax.quiver(
     [0,0,0], [0,0,0], [0,0,0],    
@@ -118,7 +117,7 @@ def animate_sat_attitude(sat_names, times, interval = 100):
             [obs_x, obs_x, obs_x],
             [obs_y, obs_y, obs_y],
             [obs_z, obs_z, obs_z],   
-            U, V, W, length=1e6, normalize = True)
+            U, V, W, length=1e6, normalize = True, color = ['r', 'g', 'b'])
         
         
         return quiver, obs_marker,
