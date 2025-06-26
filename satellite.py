@@ -17,12 +17,37 @@ earth_fixed = FramesFactory.getITRF(IERSConventions.IERS_2010, True)
 earth_ellipsoid = OneAxisEllipsoid(Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
                                    Constants.WGS84_EARTH_FLATTENING,
                                    earth_fixed)
-"""
-Define a Satellite class, in which we can create satellites and run their
-orbits and propagators.
-"""
+
 class Satellite:
     def __init__(self, a, e, i, omega, raan, anomaly, epoch, anomaly_type, label = "(no label)"):
+        """
+        Initialization function for the satellite class
+
+        Parameters
+        ----------
+        a : int
+            Semi-major axis (m).
+        e : float
+            Eccentricity - dimensionless.
+        i : float
+            Inclination (radian).
+        omega : float
+            Argument of periapsis (radian).
+        raan : float
+            Right ascension of the ascending node (radian).
+        anomaly : float
+            Anomaly (radian).
+        epoch : orekit.time.AbsoluteDate
+            Start time of simulation (date).
+        anomaly_type : str
+            Type of anomaly being used (TRUE, ECCENTRIC, MEAN)
+        label = "No Label" : str
+            Name of satellite
+            
+        Returns
+        -------
+        """
+        # Set arguments as parameters of class
         self.a, self.e, self.i = a, e, i
         self.omega, self.raan, self.anomaly = omega, raan, anomaly
         self.anomaly_type = anomaly_type
@@ -39,9 +64,6 @@ class Satellite:
         # The same is done for KeplerianPropagator
         self.propagator = KeplerianPropagator(self.orbit)
         
-        # Find initial position and velocity for orientation
-        state_init = self.orbit.getPVCoordinates(epoch, inertial)
-        
         # Initialize caches to empty
         self._cache_times = None
         self._cache_poses = None
@@ -56,7 +78,32 @@ class Satellite:
        
     # Update changes in orbital parameters
     def update_orbit(self, *, a = None, e = None, i = None, omega = None, 
-                     raan = None, anomaly = None, anomaly_type = None):
+                     raan = None, anomaly = None, epoch = None, anomaly_type = None):
+        """
+        Updates satellite parameters
+
+        Parameters
+        ----------
+        a = None : int
+            Semi-major axis (m).
+        e = None : float
+            Eccentricity - dimensionless.
+        i = None : float
+            Inclination (radian).
+        omega = None : float
+            Argument of periapsis (radian).
+        raan = None : float
+            Right ascension of the ascending node (radian).
+        anomaly = None : float
+            Anomaly (radian).
+        epoch = None : orekit.time.AbsoluteDate
+            Start time of simulation (date).
+        anomaly_type = None : str
+            Type of anomaly being used (TRUE, ECCENTRIC, MEAN)
+            
+        Returns
+        -------
+        """
         changed = False
         # Check if any parameters have been updated
         if a is not None and a != self.a:
@@ -76,6 +123,9 @@ class Satellite:
             changed = True
         if anomaly is not None and anomaly != self.anomaly:
             self.anomaly = anomaly
+            changed = True
+        if epoch is not None and epoch != self.epoch:
+            self.epoch = epoch
             changed = True
         if anomaly_type is not None and anomaly_type != self.anomaly_type:
             self.anomaly_type = anomaly_type
@@ -107,6 +157,19 @@ class Satellite:
         
     # Define a method that will propagate over time
     def propagate(self, times):
+        """
+        Propagate the orbit of the satellite object across time 
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        _cache_poses : array
+            Array of positions in 3D (m, m, m)
+        """
         # If we have not yet run propagate or the time input has changed:
         if (self._cache_times is None 
             or not np.array_equal(times, self._cache_times)):
@@ -133,15 +196,44 @@ class Satellite:
             self._cache_lla = None
             self._cache_gtc = None
             self._cache_quats = None
-        
+            
         return self._cache_poses
     
     def get_vels(self, times):
+        """
+        Retrieve the velocities of a satellite across time
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        _cache_vels : array
+            Array of velocities in 3D (m s^-1, m s^-1, m s^-1)
+        """
         self.propagate(times)
         
         return self._cache_vels
 
     def _glob_to_cart(self, times):
+        """
+        Transform ECI coordinates into cartesian, and ECEF coordinates
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        ecef_poses : array
+            Array of positions in ECEF (m, m, m)
+        lla_poses : array
+            Array of longitude, latitude, altitude for satellite over time
+            (deg, deg, m)
+        """
         poses = self.propagate(times)
         # Generate an empty matrix to store positions over time
         ecef_poses = np.zeros((len(times), 3))
@@ -170,6 +262,17 @@ class Satellite:
         return ecef_poses, lla_poses
    
     def _ensure_converted(self, times):
+        """
+        Ensure conversion between reference frames has taken place
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        """
         poses = self.propagate(times)
         # If no cache for ecef or lla, compute new ones
         if self._cache_ecef is None or self._cache_lla is None:
@@ -179,14 +282,53 @@ class Satellite:
             self._cache_gtc = None
    
     def get_ecef(self, times):
+        """
+        Retrieve ECEF positions over time
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        _cache_ecef : array
+            Array of ECEF positions (m, m, m)
+        """
         self._ensure_converted(times)
         return self._cache_ecef
          
     def get_lla(self, times):
+        """
+        Retrieve lla positions over time
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        _cache_lla : array
+            Array of ECEF positions (m, m, m)
+        """
         self._ensure_converted(times)
         return self._cache_lla
         
     def get_gtc(self, times):
+        """
+        Retrieve ground track positions over time
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        _cache_gtc : array
+            Array of ground track positions (deg, deg)
+        """
         _ = self.get_lla(times)
         
         # If gtc has not been previously computed, find gtc
@@ -213,6 +355,17 @@ class Satellite:
             
     # Define initial pointing for Satellite based on trajectory and anomaly
     def _pointing(self, times):
+        """
+        Compute nadir pointing reference frame for satellite over time
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        """
         poses = self.propagate(times)
         vels = self.get_vels(times)
         quats = np.zeros((len(times), 4))
@@ -247,8 +400,21 @@ class Satellite:
             self._cache_quats = quats
         
     def get_quats(self, times):
+        """
+        Retrieve quaternions for satellite nadir pointing over time
+        
+        Parameters
+        ----------
+        times : np.array
+            Array of timesteps (s)
+        
+        Returns
+        -------
+        _cache_quats : array
+            Array of nadir pointing quaternions (m, m, m)
+        """
         self._pointing(times)
         return self._cache_quats
-        
-        
+
 #%cd "C:/Users/pelay/OneDrive - University of Bath/Experiences/SuperSharp/Project"
+#cd "C:\Users\pelay\OneDrive - University of Bath\Experiences\SuperSharp\Project"

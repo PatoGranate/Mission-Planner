@@ -5,6 +5,23 @@ from scipy.spatial.transform import Rotation as R
 import satellite_utils
 
 def plot_ground_tracks(sat_names, times):
+    """
+    Plot the ground tracks of a set of satellites
+    
+    Parameters
+    ----------
+    sat_names : satellite.Satellite array
+        Array of Satellite objects
+    times : np.array
+        Array of timesteps (s)
+        
+    Returns
+    -------
+    fig : figure.Figure
+        Ground track figure
+    ax : axes._axes.Axes
+        2D axes configured for ground track plotting
+    """
     fig = plt.figure()
     ax = fig.add_subplot()
     earth_map = plt.imread('earth_outline.png')
@@ -24,6 +41,23 @@ def plot_ground_tracks(sat_names, times):
     return fig, ax
     
 def plot_orbits(sat_names, times):
+    """
+    Plot earth and 3D orbital track of satellites
+    
+    Parameters
+    ----------
+    sat_names : satellite.Satellite array
+        Array of Satellite objects
+    times : np.array
+        Array of timesteps (s)
+        
+    Returns
+    -------
+    fig : figure.Figure
+        Ground track figure
+    ax : axes._axes.Axes
+        3D axes configured for orbit propagation
+    """
     R_earth = 6.378e6
     n_lon = 60
     n_lat = 30
@@ -64,13 +98,34 @@ def plot_orbits(sat_names, times):
     
     return fig, ax
 
-def plot_cross_sat(satA, satB, times, tolerance):
-    cross_dist = satellite_utils.get_cross_dist(satA, satB, times, tolerance)
-
+def plot_cross_sat(sat_names, times, tolerance):
+    """
+    Plot distances from observer satellite to other satellites
+    
+    Parameters
+    ----------
+    sat_names : satellite.Satellite array
+        Array of Satellite objects
+    times : np.array
+        Array of timesteps (s)
+    tolerance : int
+        Maxmium distance for visibility (m)
+        
+    Returns
+    -------
+    fig : figure.Figure
+        Ground track figure
+    ax : axes._axes.Axes
+        2D axes configured for distance visualization
+    """
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.plot(times, cross_dist)
     ax.axhline(y = tolerance, color = 'r', linestyle = '--')
+    
+    for i in range(1, len(sat_names)):
+        cross_dist = satellite_utils.get_cross_dist(sat_names[0], sat_names[i], times, tolerance)
+        ax.plot(times, cross_dist)
+    
     ax.set_xlabel('Time elapsed (s)')
     ax.set_ylabel('Cross-sat distance (m)')
     ax.set_xlim([0, max(times)+1])
@@ -78,49 +133,72 @@ def plot_cross_sat(satA, satB, times, tolerance):
     
     return fig, ax
 
-
-
-
-def animate_sat_attitude(sat_names, times, interval = 100):
+def animate_sat_attitude(sat_names, times, tolerance, interval = 100):
+    """
+    Animate satellite objects and attitude frames around orbits
+    
+    Parameters
+    ----------
+    sat_names : satellite.Satellite array
+        Array of Satellite objects
+    times : np.array
+        Array of timesteps (s)
+    tolerance : int
+        Maxmium distance for visibility (m)
+    interval = 100 : int
+        Interval between frames
+        
+    Returns
+    -------
+    anim : animation.FuncAnimation
+        Satellite and frame animation
+    """
+    #quats = satellite_utils.sat_tracker(sat_names[0], sat_names[1], times, tolerance)
     quats = sat_names[0].get_quats(times)
     rots = R.from_quat(quats)
-    DCM_eci2body = rots.as_matrix()
     DCM_body2eci = rots.as_matrix()
     
     fig, ax = plot_orbits(sat_names, times)
     
-    obs_traj = sat_names[0].propagate(times)
-    obs_marker = ax.scatter(obs_traj[0,0], obs_traj[0,1], obs_traj[0,2], 
-                            s = 50, label = sat_names[0].label)
-
+    trajectories = [sat.propagate(times) for sat in sat_names]
+        
+    markers = []
+    for traj, sat in zip(trajectories, sat_names):
+        x0, y0, z0 = traj[0]
+        m = ax.scatter(x0, y0, z0, s=200, label=sat.label)
+        markers.append(m)
     
-    quiver = ax.quiver(
-    [0,0,0], [0,0,0], [0,0,0],    
-    [1,0,0], [0,1,0], [0,0,1], # initial directions = body-axes aligned with ECI
-    length=1)
+    obs_x0, obs_y0, obs_z0 = trajectories[0][0]
+    quiver = ax.quiver([obs_x0]*3, [obs_y0]*3, [obs_z0]*3,    
+                       [1,0,0], [0,1,0], [0,0,1], length=1.5e6, 
+                       normalize = True, color = ['b', 'g', 'r'])
     
-    def update(i):
+    def update(frame):
         nonlocal quiver
-        
-        obs_x, obs_y, obs_z = obs_traj[i]
-        obs_marker._offsets3d = ([obs_x], [obs_y], [obs_z])
-        
         quiver.remove()
         
-        
-        axes_sat = DCM_body2eci[i]
-        U = axes_sat[:,0]
-        V = axes_sat[:,1]
-        W = axes_sat[:,2]
-        
-        quiver = ax.quiver(
-            [obs_x, obs_x, obs_x],
-            [obs_y, obs_y, obs_y],
-            [obs_z, obs_z, obs_z],   
-            U, V, W, length=1e6, normalize = True, color = ['r', 'g', 'b'])
-        
-        
-        return quiver, obs_marker,
+        for idx, (m, traj) in enumerate(zip(markers, trajectories)):
+            if idx == 0:
+                x_obs, y_obs, z_obs = traj[frame]
+                m._offsets3d = ([x_obs], [y_obs], [z_obs])
+                
+                axes_sat = DCM_body2eci[frame]
+                U = axes_sat[:,0]
+                V = axes_sat[:,1]
+                W = axes_sat[:,2]
+                
+                quiver = ax.quiver(
+                    [x_obs]*3,
+                    [y_obs]*3,
+                    [z_obs]*3,   
+                    U, V, W, length=1.5e6, normalize = True, color = ['b', 'g', 'r'])
+                
+            else:
+                x, y, z = traj[frame]
+                m._offsets3d = ([x], [y], [z])
+ 
+        ax.set_title(f"Time elapsed: {times[frame]:.0f}s")
+        return (*markers, quiver)
     
     anim = FuncAnimation(fig, update, frames = len(times),
                          interval = interval, blit = False)

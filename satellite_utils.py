@@ -1,5 +1,4 @@
 import numpy as np
-import itertools
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from scipy.spatial.transform import Rotation as R
 
@@ -7,6 +6,24 @@ _cross_cache = {}
 
 # Compute distance between two points
 def cross_sat(satA, satB, times, tolerance):
+    """
+    Compute the distance bewteen two satellites as they move through time
+    and find the times when they are within direct line of sight of eachother
+    
+    Parameters
+    ----------
+    satA : satellite.Satellite
+        First satellite considered
+    satB : satellite.Satellite 
+        Second satellite considered
+    times : np.array
+        Array of timesteps (s)
+    tolerance : int
+        Maxmium distance for visibility (m)
+    
+    Returns
+    -------
+    """
     # Find the key for the specific satellites and times being called
     key_parts = sorted([(id(satA), satA._version),
                         (id(satB), satB._version)])
@@ -30,6 +47,25 @@ def cross_sat(satA, satB, times, tolerance):
         
         
 def get_cross_dist(satA, satB, times, tolerance):
+    """
+    Retrieve distance array from cross-satellite computations
+    
+    Parameters
+    ----------
+    satA : satellite.Satellite
+        First satellite considered
+    satB : satellite.Satellite 
+        Second satellite considered
+    times : np.array
+        Array of timesteps (s)
+    tolerance : int
+        Maxmium distance for visibility (m)
+    
+    Returns
+    -------
+    _cross_cache[key][0] : array
+        Distance between both satellites across time (m)
+    """
     cross_sat(satA, satB, times, tolerance)
     key_parts = sorted([(id(satA), satA._version),
                         (id(satB), satB._version)])
@@ -38,6 +74,25 @@ def get_cross_dist(satA, satB, times, tolerance):
     return _cross_cache[key][0]
 
 def get_runs(satA, satB, times, tolerance):
+    """
+    Retrieve runs array from cross-satellite computations
+    
+    Parameters
+    ----------
+    satA : satellite.Satellite
+        First satellite considered
+    satB : satellite.Satellite 
+        Second satellite considered
+    times : np.array
+        Array of timesteps (s)
+    tolerance : int
+        Maxmium distance for visibility (m)
+    
+    Returns
+    -------
+    _cross_cache[key][1] : array
+        [(start elapsed time 1, end elapsed time 1, duration 1), ...]
+    """
     cross_sat(satA, satB, times, tolerance)
     key_parts = sorted([(id(satA), satA._version),
                         (id(satB), satB._version)])
@@ -46,6 +101,25 @@ def get_runs(satA, satB, times, tolerance):
     return _cross_cache[key][1]
 
 def target_pointer(satA, satB, times, tolerance):
+    """
+    Compute pointing for satA observation of satB
+    
+    Parameters
+    ----------
+    satA : satellite.Satellite
+        First satellite considered
+    satB : satellite.Satellite 
+        Second satellite considered
+    times : np.array
+        Array of timesteps (s)
+    tolerance : int
+        Maxmium distance for visibility (m)
+    
+    Returns
+    -------
+    quat : float64 array
+        Quaternion for rotation with respect to ECI for satB pointing (from satA)
+    """
     runs = get_runs(satA, satB, times, tolerance)
     cross_dist = get_cross_dist(satA, satB, times, tolerance)
     
