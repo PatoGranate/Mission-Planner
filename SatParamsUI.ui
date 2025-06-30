@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>664</width>
-    <height>395</height>
+    <height>441</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="2" column="0">
-     <widget class="QPushButton" name="bCancel">
+     <widget class="QPushButton" name="sat_cancel">
       <property name="palette">
        <palette>
         <active>
@@ -65,7 +65,7 @@
      </widget>
     </item>
     <item row="0" column="0" colspan="2">
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="sat_params_box">
       <property name="font">
        <font>
         <pointsize>14</pointsize>
@@ -79,14 +79,14 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="label_inclination">
          <property name="text">
           <string>Inclination</string>
          </property>
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QSpinBox" name="spinBox_3">
+        <widget class="QSpinBox" name="set_i">
          <property name="maximum">
           <number>359</number>
          </property>
@@ -115,42 +115,42 @@
         </widget>
        </item>
        <item row="8" column="0">
-        <widget class="QLabel" name="label_7">
+        <widget class="QLabel" name="label_epoch">
          <property name="text">
           <string>Epoch</string>
          </property>
         </widget>
        </item>
        <item row="8" column="2" colspan="2">
-        <widget class="QLineEdit" name="lineEdit_5">
+        <widget class="QLineEdit" name="set_epoch">
          <property name="enabled">
           <bool>false</bool>
          </property>
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="lSMA">
+        <widget class="QLabel" name="label_semi_major_axis">
          <property name="text">
           <string>Semi-major axis</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="label_omega">
          <property name="text">
           <string>Arg Periapsis</string>
          </property>
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QSpinBox" name="spinBox_2">
+        <widget class="QSpinBox" name="set_omega">
          <property name="maximum">
           <number>359</number>
          </property>
         </widget>
        </item>
        <item row="7" column="0">
-        <widget class="QLabel" name="label_6">
+        <widget class="QLabel" name="label_sat_name">
          <property name="text">
           <string>Sat Name</string>
          </property>
@@ -179,24 +179,24 @@
         </widget>
        </item>
        <item row="6" column="0">
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="label_anomaly_type">
          <property name="text">
           <string>Anomaly Type</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_raan">
          <property name="text">
           <string>RAAN</string>
          </property>
         </widget>
        </item>
        <item row="7" column="2" colspan="2">
-        <widget class="QLineEdit" name="lineEdit_4"/>
+        <widget class="QLineEdit" name="set_sat_name"/>
        </item>
        <item row="6" column="2" colspan="2">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="set_anomaly_type">
          <item>
           <property name="text">
            <string>TRUE</string>
@@ -215,7 +215,7 @@
         </widget>
        </item>
        <item row="1" column="2" colspan="2">
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="set_e"/>
        </item>
        <item row="3" column="2">
         <widget class="QSlider" name="horizontalSlider_2">
@@ -234,21 +234,21 @@
         </widget>
        </item>
        <item row="5" column="3">
-        <widget class="QSpinBox" name="spinBox_4">
+        <widget class="QSpinBox" name="set_anomaly">
          <property name="maximum">
           <number>359</number>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="lEcc">
+        <widget class="QLabel" name="label_eccentricity">
          <property name="text">
           <string>Eccentricity</string>
          </property>
         </widget>
        </item>
        <item row="4" column="3">
-        <widget class="QSpinBox" name="spinBox">
+        <widget class="QSpinBox" name="set_raan">
          <property name="maximum">
           <number>359</number>
          </property>
@@ -258,14 +258,14 @@
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="label_anomaly">
          <property name="text">
           <string>Anomaly</string>
          </property>
         </widget>
        </item>
        <item row="0" column="2" colspan="2">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="set_a"/>
        </item>
        <item row="5" column="2">
         <widget class="QSlider" name="horizontalSlider_4">
@@ -287,7 +287,10 @@
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QPushButton" name="bCreate">
+     <widget class="QPushButton" name="create_sat">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="font">
        <font>
         <pointsize>14</pointsize>
@@ -309,15 +312,30 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFunctions">
+    <property name="title">
+     <string>Functions</string>
+    </property>
+    <addaction name="actionReset"/>
+   </widget>
+   <addaction name="menuFunctions"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
   <connection>
    <sender>horizontalSlider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_3</receiver>
+   <receiver>set_i</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -333,7 +351,7 @@
   <connection>
    <sender>horizontalSlider_2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_2</receiver>
+   <receiver>set_omega</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -349,7 +367,7 @@
   <connection>
    <sender>horizontalSlider_3</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox</receiver>
+   <receiver>set_raan</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -363,7 +381,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox</sender>
+   <sender>set_raan</sender>
    <signal>valueChanged(int)</signal>
    <receiver>horizontalSlider_3</receiver>
    <slot>setValue(int)</slot>
@@ -379,7 +397,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_2</sender>
+   <sender>set_omega</sender>
    <signal>valueChanged(int)</signal>
    <receiver>horizontalSlider_2</receiver>
    <slot>setValue(int)</slot>
@@ -395,7 +413,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_3</sender>
+   <sender>set_i</sender>
    <signal>valueChanged(int)</signal>
    <receiver>horizontalSlider</receiver>
    <slot>setValue(int)</slot>
@@ -413,7 +431,7 @@
   <connection>
    <sender>horizontalSlider_4</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_4</receiver>
+   <receiver>set_anomaly</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -427,7 +445,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_4</sender>
+   <sender>set_anomaly</sender>
    <signal>valueChanged(int)</signal>
    <receiver>horizontalSlider_4</receiver>
    <slot>setValue(int)</slot>

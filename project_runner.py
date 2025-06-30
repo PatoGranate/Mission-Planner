@@ -53,7 +53,7 @@ sat3 = Satellite(a3, e3, i3, omega3, raan3, anomaly3, common_epoch, anomaly_type
 # Plot variation in cross distance between satellites
 global_tolerance = 3000000
 
-#visualization.plot_ground_tracks([sat1, sat2], times)
+visualization.plot_ground_tracks([sat1, sat2], times)
 #visualization.plot_orbits([sat1, sat2], times)
 visualization.plot_cross_sat([sat1, sat2, sat3], times, global_tolerance)
 
