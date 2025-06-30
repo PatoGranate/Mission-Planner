@@ -24,7 +24,7 @@ def plot_ground_tracks(sat_names, times):
     """
     fig = plt.figure()
     ax = fig.add_subplot()
-    earth_map = plt.imread('earth_outline.png')
+    earth_map = plt.imread('imgs/earth_outline.png')
     ax.imshow(earth_map, extent=[-180, 180, -90, 90], origin='upper', aspect='equal')
     
     ax.set_xlim([-180, 180])

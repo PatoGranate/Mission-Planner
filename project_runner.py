@@ -40,9 +40,9 @@ anomaly_type2 = "TRUE"
 a3 = 7.5e6
 e3 = float(0.05)
 i3 = float(np.deg2rad(30))
-omega3 = float(np.deg2rad(30))
-raan3 = float(np.deg2rad(60))
-anomaly3 = float(np.deg2rad(175))
+omega3 = float(np.deg2rad(45))
+raan3 = float(np.deg2rad(90))
+anomaly3 = float(np.deg2rad(15))
 anomaly_type3 = "TRUE"
 
 # Build Sat(s) and find trajectory(/ies) and gtc(s)
@@ -59,4 +59,4 @@ visualization.plot_cross_sat([sat1, sat2, sat3], times, global_tolerance)
 
 #quats = Satellite.get_quats(sat1, times)
 #satellite_utils.target_pointer(sat1, sat2, times, global_tolerance)
-visualization.animate_sat_attitude([sat1, sat2, sat3], times, global_tolerance)
+anim = visualization.animate_sat_attitude([sat1, sat2, sat3], times, global_tolerance)
