@@ -5,6 +5,7 @@ from org.orekit.utils import Constants, IERSConventions
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.bodies import OneAxisEllipsoid
 from org.hipparchus.geometry.euclidean.threed import Vector3D
+from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from scipy.spatial.transform import Rotation as R
 
 """
@@ -19,7 +20,7 @@ earth_ellipsoid = OneAxisEllipsoid(Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
                                    earth_fixed)
 
 class Satellite:
-    def __init__(self, a, e, i, omega, raan, anomaly, epoch, anomaly_type, label = "(no label)"):
+    def __init__(self, a, e, i, omega, raan, anomaly, date, anomaly_type, label = "(no label)"):
         """
         Initialization function for the satellite class
 
@@ -37,8 +38,8 @@ class Satellite:
             Right ascension of the ascending node (radian).
         anomaly : float
             Anomaly (radian).
-        epoch : orekit.time.AbsoluteDate
-            Start time of simulation (date).
+        date : array
+            [year, month, day, hour, minute, second].
         anomaly_type : str
             Type of anomaly being used (TRUE, ECCENTRIC, MEAN)
         label = "No Label" : str
@@ -51,7 +52,11 @@ class Satellite:
         self.a, self.e, self.i = a, e, i
         self.omega, self.raan, self.anomaly = omega, raan, anomaly
         self.anomaly_type = anomaly_type
+        
+        utc = TimeScalesFactory.getUTC()
+        epoch = AbsoluteDate(date[0], date[1], date[2], date[3], date[4], date[5], utc)
         self.epoch = epoch
+        
         self.label = label
         
         # KeplarianOrbit is defined once per satellite class and then re-used

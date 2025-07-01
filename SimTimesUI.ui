@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>381</height>
+    <width>933</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,6 +24,9 @@
       </property>
       <property name="text">
        <string>Confirm</string>
+      </property>
+      <property name="shortcut">
+       <string>Return</string>
       </property>
      </widget>
     </item>
@@ -143,7 +146,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>645</width>
+     <width>933</width>
      <height>22</height>
     </rect>
    </property>
@@ -165,6 +168,13 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>set_epoch</tabstop>
+  <tabstop>set_duration</tabstop>
+  <tabstop>set_timestep</tabstop>
+  <tabstop>times_cancel</tabstop>
+  <tabstop>times_confirm</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

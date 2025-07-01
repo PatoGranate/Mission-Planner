@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>642</width>
-    <height>465</height>
+    <width>929</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0">
-     <widget class="QGroupBox" name="Simulation">
+     <widget class="QGroupBox" name="simulation">
       <property name="font">
        <font>
         <pointsize>14</pointsize>
@@ -57,7 +57,7 @@
         </widget>
        </item>
        <item row="1" column="0" colspan="3">
-        <widget class="QComboBox" name="visOps">
+        <widget class="QComboBox" name="vis_ops">
          <item>
           <property name="text">
            <string>Ground Tracks</string>
@@ -81,7 +81,7 @@
         </widget>
        </item>
        <item row="0" column="0" colspan="3">
-        <widget class="QFrame" name="fGraph">
+        <widget class="QFrame" name="graph_frame">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -100,13 +100,19 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>642</width>
+     <width>929</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>vis_ops</tabstop>
+  <tabstop>new_sat</tabstop>
+  <tabstop>sim_timer</tabstop>
+  <tabstop>run</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

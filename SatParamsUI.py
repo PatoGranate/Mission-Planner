@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(664, 441)
+        MainWindow.resize(934, 613)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -65,6 +65,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.label_epoch, 8, 0, 1, 1)
         self.set_epoch = QtWidgets.QLineEdit(self.sat_params_box)
         self.set_epoch.setEnabled(False)
+        self.set_epoch.setInputMask("")
         self.set_epoch.setObjectName("set_epoch")
         self.gridLayout_2.addWidget(self.set_epoch, 8, 2, 1, 2)
         self.label_semi_major_axis = QtWidgets.QLabel(self.sat_params_box)
@@ -149,7 +150,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.create_sat, 2, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 664, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 934, 22))
         self.menubar.setObjectName("menubar")
         self.menuFunctions = QtWidgets.QMenu(self.menubar)
         self.menuFunctions.setObjectName("menuFunctions")
@@ -172,6 +173,20 @@ class Ui_MainWindow(object):
         self.horizontalSlider_4.valueChanged['int'].connect(self.set_anomaly.setValue) # type: ignore
         self.set_anomaly.valueChanged['int'].connect(self.horizontalSlider_4.setValue) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.set_a, self.set_e)
+        MainWindow.setTabOrder(self.set_e, self.horizontalSlider)
+        MainWindow.setTabOrder(self.horizontalSlider, self.set_i)
+        MainWindow.setTabOrder(self.set_i, self.horizontalSlider_2)
+        MainWindow.setTabOrder(self.horizontalSlider_2, self.set_omega)
+        MainWindow.setTabOrder(self.set_omega, self.horizontalSlider_3)
+        MainWindow.setTabOrder(self.horizontalSlider_3, self.set_raan)
+        MainWindow.setTabOrder(self.set_raan, self.horizontalSlider_4)
+        MainWindow.setTabOrder(self.horizontalSlider_4, self.set_anomaly)
+        MainWindow.setTabOrder(self.set_anomaly, self.set_anomaly_type)
+        MainWindow.setTabOrder(self.set_anomaly_type, self.set_sat_name)
+        MainWindow.setTabOrder(self.set_sat_name, self.set_epoch)
+        MainWindow.setTabOrder(self.set_epoch, self.sat_cancel)
+        MainWindow.setTabOrder(self.sat_cancel, self.create_sat)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -191,6 +206,7 @@ class Ui_MainWindow(object):
         self.label_eccentricity.setText(_translate("MainWindow", "Eccentricity"))
         self.label_anomaly.setText(_translate("MainWindow", "Anomaly"))
         self.create_sat.setText(_translate("MainWindow", "Create Sat"))
+        self.create_sat.setShortcut(_translate("MainWindow", "Return"))
         self.menuFunctions.setTitle(_translate("MainWindow", "Functions"))
         self.actionReset.setText(_translate("MainWindow", "Reset"))
         self.actionReset.setShortcut(_translate("MainWindow", "Ctrl+R"))

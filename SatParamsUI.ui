@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
-    <height>441</height>
+    <width>934</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,6 +125,9 @@
         <widget class="QLineEdit" name="set_epoch">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="inputMask">
+          <string/>
          </property>
         </widget>
        </item>
@@ -299,6 +302,9 @@
       <property name="text">
        <string>Create Sat</string>
       </property>
+      <property name="shortcut">
+       <string>Return</string>
+      </property>
      </widget>
     </item>
    </layout>
@@ -308,7 +314,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>664</width>
+     <width>934</width>
      <height>22</height>
     </rect>
    </property>
@@ -330,6 +336,23 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>set_a</tabstop>
+  <tabstop>set_e</tabstop>
+  <tabstop>horizontalSlider</tabstop>
+  <tabstop>set_i</tabstop>
+  <tabstop>horizontalSlider_2</tabstop>
+  <tabstop>set_omega</tabstop>
+  <tabstop>horizontalSlider_3</tabstop>
+  <tabstop>set_raan</tabstop>
+  <tabstop>horizontalSlider_4</tabstop>
+  <tabstop>set_anomaly</tabstop>
+  <tabstop>set_anomaly_type</tabstop>
+  <tabstop>set_sat_name</tabstop>
+  <tabstop>set_epoch</tabstop>
+  <tabstop>sat_cancel</tabstop>
+  <tabstop>create_sat</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

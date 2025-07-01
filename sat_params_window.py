@@ -8,6 +8,7 @@ class SatParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.sat_cancel.clicked.connect(self.close)
         self.create_sat.clicked.connect(self.sat_create)
+        self.actionReset.triggered.connect(self.reset)
         
     def sat_create(self):
         a_input = self.set_a.text()
@@ -18,6 +19,8 @@ class SatParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         anomaly_input = self.set_anomaly.text()
         anomaly_type = self.set_anomaly_type.currentText()
         sat_name = self.set_sat_name.text()
+        
+        date = self.parent().date
         
         try:
             a = float(a_input) * 1000
@@ -37,13 +40,19 @@ class SatParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 "Eccentricity must be between 0 and 1")
             return
         
-        sat1 = Satellite(a, e, i, raan, omega, anomaly, epoch, anomaly_type, label = sat_name)
+        sat1 = Satellite(a, e, i, raan, omega, anomaly, date, 
+                         anomaly_type, label = sat_name)
         
-        return sat1
+        self.parent().sat1 = sat1
+        self.close()
     
-    """
-    QUEDA PENDIENTE PARA MAÑANA AVERIGUAR COMO PASAR EL EPOCH DE UN LADO A OTRO
-    Y ASÍ PODER CREAR EL OBJETO DE LA CLASE SATELITE. TAMBIÉN HACE FALTA ENTENDER BIEN
-    DONDE HAY QUE IMPORTAR CADA COSA POR QUE AHORA MISMO TIENES UNOS IMPORTS
-    QUE IGUAL NO ESTAN EN EL DOCU CORRECTO
-    """
+    def reset(self):
+        self.set_a.clear()
+        self.set_e.clear()
+        self.set_i.setValue(0)
+        self.set_omega.setValue(0)
+        self.set_raan.setValue(0)
+        self.set_anomaly.setValue(0)
+        self.set_anomaly_type.setCurrentIndex(0)
+        self.set_sat_name.clear()
+        

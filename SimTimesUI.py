@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(645, 381)
+        MainWindow.resize(933, 564)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -74,7 +74,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.epoch_and_duration, 0, 0, 1, 2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 645, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 933, 22))
         self.menubar.setObjectName("menubar")
         self.menuFunctions = QtWidgets.QMenu(self.menubar)
         self.menuFunctions.setObjectName("menuFunctions")
@@ -89,11 +89,16 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.set_epoch, self.set_duration)
+        MainWindow.setTabOrder(self.set_duration, self.set_timestep)
+        MainWindow.setTabOrder(self.set_timestep, self.times_cancel)
+        MainWindow.setTabOrder(self.times_cancel, self.times_confirm)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.times_confirm.setText(_translate("MainWindow", "Confirm"))
+        self.times_confirm.setShortcut(_translate("MainWindow", "Return"))
         self.times_cancel.setText(_translate("MainWindow", "Cancel"))
         self.epoch_and_duration.setTitle(_translate("MainWindow", "Simulation Epoch and Duration"))
         self.times_epoch_label.setText(_translate("MainWindow", "Epoch"))
