@@ -4,6 +4,11 @@ from scipy.spatial.transform import Rotation as R
 
 _cross_cache = {}
 
+# Generate times array
+def get_times(duration, timestep):
+    times = np.arange(0, duration, timestep)
+    return times
+
 # Compute distance between two points
 def cross_sat(satA, satB, times, tolerance):
     """

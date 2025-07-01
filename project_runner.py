@@ -24,33 +24,33 @@ second = 0.0
 
 date = [year, month, day, hour, minute, second]
 
+
 duration = 140000
 timestep = 60
-times = np.arange(0, duration, timestep)
-
+times = satellite_utils.get_times(duration, timestep)
 # Satellite(s) params
 a1 = 7e6
 e1 = float(0.00)
-i1 = float(np.deg2rad(60))
-omega1 = float(np.deg2rad(10))
-raan1 = float(np.deg2rad(40))
-anomaly1 = float(np.deg2rad(160))
+i1 = float(60)
+omega1 = float(10)
+raan1 = float(40)
+anomaly1 = float(160)
 anomaly_type1 = "TRUE"
 
 a2 = 7.5e6
 e2 = float(0.05)
-i2 = float(np.deg2rad(60))
-omega2 = float(np.deg2rad(30))
-raan2 = float(np.deg2rad(60))
-anomaly2 = float(np.deg2rad(175))
+i2 = float(60)
+omega2 = float(30)
+raan2 = float(60)
+anomaly2 = float(175)
 anomaly_type2 = "TRUE"
 
 a3 = 7.5e6
 e3 = float(0.05)
-i3 = float(np.deg2rad(30))
-omega3 = float(np.deg2rad(45))
-raan3 = float(np.deg2rad(90))
-anomaly3 = float(np.deg2rad(15))
+i3 = float(30)
+omega3 = float(45)
+raan3 = float(90)
+anomaly3 = float(15)
 anomaly_type3 = "TRUE"
 
 # Build Sat(s) and find trajectory(/ies) and gtc(s)

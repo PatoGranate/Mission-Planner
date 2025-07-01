@@ -49,8 +49,8 @@ class Satellite:
         -------
         """
         # Set arguments as parameters of class
-        self.a, self.e, self.i = a, e, i
-        self.omega, self.raan, self.anomaly = omega, raan, anomaly
+        self.a, self.e, self.i = float(a), float(e), float(np.deg2rad(i))
+        self.omega, self.raan, self.anomaly = float(np.deg2rad(omega)), float(np.deg2rad(raan)), float(np.deg2rad(anomaly))
         self.anomaly_type = anomaly_type
         
         utc = TimeScalesFactory.getUTC()

@@ -34,9 +34,11 @@ def plot_ground_tracks(sat_names, times):
     ax.set_xlabel('Longitude (°)')
     ax.set_ylabel('Latitude (°)')
     
-    for i in range(len(sat_names)):
+    for i, sat in enumerate(sat_names):
         lonlat = sat_names[i].get_gtc(times)
-        ax.plot(lonlat[:,0], lonlat[:,1])
+        ax.plot(lonlat[:,0], lonlat[:,1], label = sat.label)
+    
+    ax.legend()
     
     return fig, ax
     
