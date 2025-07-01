@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
-from SimTimesUI import Ui_MainWindow
+from src.gui.SimTimesUI import Ui_MainWindow
 from PyQt5.QtCore import QDate, QTime, QDateTime
-from satellite_utils import get_times
+from src.model.satellite_utils import get_times
 
 class TimesWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):

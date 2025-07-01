@@ -4,14 +4,18 @@ orekit.initVM()
 
 # Allows machine to search for orekit-data.zip within current directory
 from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir()
+from pathlib import Path
+
+# point to your data folder:
+data_dir = Path(__file__).parent.parent.parent / "data" / "orekit-data-master"
+setup_orekit_curdir(str(data_dir))
 
 # Imports
 import numpy as np
 
-from satellite import Satellite
-import satellite_utils
-import visualization
+from src.model.satellite import Satellite
+import src.model.satellite_utils as satellite_utils
+import src.model.visualization as visualization
 
 # Define a common epoch and time range
 

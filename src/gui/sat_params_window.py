@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
-from SatParamsUI import Ui_MainWindow
-from satellite import Satellite
+from src.gui.SatParamsUI import Ui_MainWindow
+from src.model.satellite import Satellite
 
 class SatParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):

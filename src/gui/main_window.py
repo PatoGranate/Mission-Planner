@@ -3,11 +3,11 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5 import QtWidgets
 import matplotlib.pyplot as plt
-from MainUI import Ui_MainWindow
-from sat_params_window import SatParamsWindow
-from times_window import TimesWindow
+from src.gui.MainUI import Ui_MainWindow
+from src.gui.sat_params_window import SatParamsWindow
+from src.gui.times_window import TimesWindow
 
-import visualization
+import src.model.visualization as visualization
 
 plt.ioff()
 

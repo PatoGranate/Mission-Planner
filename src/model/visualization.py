@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from scipy.spatial.transform import Rotation as R
-import satellite_utils
+import src.model.satellite_utils as satellite_utils
 
 def plot_ground_tracks(sat_names, times):
     """
