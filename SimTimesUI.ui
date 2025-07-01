@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>933</width>
-    <height>564</height>
+    <width>507</width>
+    <height>357</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
+    <item row="2" column="1">
      <widget class="QPushButton" name="times_confirm">
       <property name="font">
        <font>
@@ -30,7 +30,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0">
      <widget class="QPushButton" name="times_cancel">
       <property name="palette">
        <palette>
@@ -79,7 +79,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
+    <item row="1" column="0" colspan="2">
      <widget class="QGroupBox" name="epoch_and_duration">
       <property name="font">
        <font>
@@ -87,7 +87,7 @@
        </font>
       </property>
       <property name="title">
-       <string>Simulation Epoch and Duration</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -101,25 +101,11 @@
       <property name="checked">
        <bool>false</bool>
       </property>
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QLabel" name="times_epoch_label">
          <property name="text">
           <string>Epoch</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="timestep_label">
-         <property name="text">
-          <string>Timestep size (s)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="duration_label">
-         <property name="text">
-          <string>Simulation duration (s)</string>
          </property>
         </widget>
        </item>
@@ -130,13 +116,49 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="duration_label">
+         <property name="text">
+          <string>Simulation duration (s)</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="1">
         <widget class="QLineEdit" name="set_duration"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="timestep_label">
+         <property name="text">
+          <string>Timestep size (s)</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="set_timestep"/>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Simulation Times</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
    </layout>
@@ -146,7 +168,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>933</width>
+     <width>507</width>
      <height>22</height>
     </rect>
    </property>
@@ -169,7 +191,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>set_epoch</tabstop>
   <tabstop>set_duration</tabstop>
   <tabstop>set_timestep</tabstop>
   <tabstop>times_cancel</tabstop>

@@ -16,12 +16,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Initiate window
         super().__init__()
         self.setupUi(self)
-        
+
         # Creating canvas inside frame to plot graphs
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.graph_frame)
         self.horizontalLayout.setObjectName("horizontalLayout")
         
-        self.figure = Figure()
+        self.figure = Figure(facecolor = "None")
         self.canvas = FigureCanvas(self.figure)
         
         self.horizontalLayout.addWidget(self.canvas)
@@ -31,6 +31,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.new_sat.clicked.connect(self.open_sat)
         self.sim_timer.clicked.connect(self.open_times)
         self.run.clicked.connect(self.run_project)
+        
+        
     def open_sat(self):
         # Check that an epoch has been created before opening the sat window
         try:
@@ -68,14 +70,39 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         if self.vis_ops.currentIndex() == 0:
             fig, _ = visualization.plot_ground_tracks([self.sat1], self.times)
+            fig.patch.set_facecolor('none')
             self.update_canvas(fig)
         elif self.vis_ops.currentIndex() == 1:
             fig, _ = visualization.plot_orbits([self.sat1], self.times)
+            for ax in fig.axes:
+                ax.set_facecolor('none')
+            fig.patch.set_facecolor('none')
             self.update_canvas(fig)
 
+from qt_material import apply_stylesheet
 if __name__ == "__main__":
     # If script is rund irectly open the main window
     app = QtWidgets.QApplication([])
+    
+    # Override some of the style choices from the style sheet
+    apply_stylesheet(app, theme = "light_blue.xml")
+   
+    base_qss = app.styleSheet()
+
+    override = """
+    /* 1. force 14pt everywhere */
+    * {
+        font-size: 14pt !important;
+    }
+
+    /* 2. hide all QFrame/QGroupBox borders */
+    QFrame, QGroupBox {
+        border: none !important;
+        background-color: transparent !important;
+    }
+    """
+    app.setStyleSheet(base_qss + override)
+    
     w = MainWindow()
     w.show()
     app.exec_()

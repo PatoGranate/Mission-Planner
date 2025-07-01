@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>934</width>
-    <height>613</height>
+    <width>505</width>
+    <height>438</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,256 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="0">
+    <item row="3" column="1">
+     <widget class="QPushButton" name="create_sat">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Create Sat</string>
+      </property>
+      <property name="shortcut">
+       <string>Return</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QGroupBox" name="sat_params_box">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="3" column="2" colspan="2">
+        <widget class="QLineEdit" name="set_e"/>
+       </item>
+       <item row="4" column="2">
+        <widget class="QSlider" name="horizontalSlider">
+         <property name="minimum">
+          <number>-90</number>
+         </property>
+         <property name="maximum">
+          <number>90</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>false</bool>
+         </property>
+         <property name="invertedControls">
+          <bool>false</bool>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>45</number>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QSpinBox" name="set_omega">
+         <property name="maximum">
+          <number>359</number>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_anomaly">
+         <property name="text">
+          <string>Anomaly (deg)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QSlider" name="horizontalSlider_4">
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_semi_major_axis">
+         <property name="text">
+          <string>Semi-major axis (km)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QSlider" name="horizontalSlider_2">
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="label_epoch">
+         <property name="text">
+          <string>Epoch</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QSlider" name="horizontalSlider_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_anomaly_type">
+         <property name="text">
+          <string>Anomaly Type</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_sat_name">
+         <property name="text">
+          <string>Sat Name</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_raan">
+         <property name="text">
+          <string>RAAN (deg)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_inclination">
+         <property name="text">
+          <string>Inclination (deg)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_eccentricity">
+         <property name="text">
+          <string>Eccentricity</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="3">
+        <widget class="QSpinBox" name="set_anomaly">
+         <property name="maximum">
+          <number>359</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QSpinBox" name="set_raan">
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="2" colspan="2">
+        <widget class="QLineEdit" name="set_epoch">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2" colspan="2">
+        <widget class="QLineEdit" name="set_sat_name"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_omega">
+         <property name="text">
+          <string>Arg Periapsis (deg)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" colspan="2">
+        <widget class="QLineEdit" name="set_a"/>
+       </item>
+       <item row="4" column="3">
+        <widget class="QSpinBox" name="set_i">
+         <property name="minimum">
+          <number>-90</number>
+         </property>
+         <property name="maximum">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2" colspan="2">
+        <widget class="QComboBox" name="set_anomaly_type">
+         <item>
+          <property name="text">
+           <string>TRUE</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ECCENTRIC</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>MEAN</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="3" column="0">
      <widget class="QPushButton" name="sat_cancel">
       <property name="palette">
        <palette>
@@ -65,245 +314,24 @@
      </widget>
     </item>
     <item row="0" column="0" colspan="2">
-     <widget class="QGroupBox" name="sat_params_box">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
-        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
-      <property name="title">
+      <property name="text">
        <string>Satellite Parameters</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_inclination">
-         <property name="text">
-          <string>Inclination</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QSpinBox" name="set_i">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QSlider" name="horizontalSlider">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="invertedAppearance">
-          <bool>false</bool>
-         </property>
-         <property name="invertedControls">
-          <bool>false</bool>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
-         </property>
-         <property name="tickInterval">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <widget class="QLabel" name="label_epoch">
-         <property name="text">
-          <string>Epoch</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_epoch">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="inputMask">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_semi_major_axis">
-         <property name="text">
-          <string>Semi-major axis</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_omega">
-         <property name="text">
-          <string>Arg Periapsis</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QSpinBox" name="set_omega">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="label_sat_name">
-         <property name="text">
-          <string>Sat Name</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QSlider" name="horizontalSlider_3">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="value">
-          <number>0</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
-         </property>
-         <property name="tickInterval">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_anomaly_type">
-         <property name="text">
-          <string>Anomaly Type</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_raan">
-         <property name="text">
-          <string>RAAN</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_sat_name"/>
-       </item>
-       <item row="6" column="2" colspan="2">
-        <widget class="QComboBox" name="set_anomaly_type">
-         <item>
-          <property name="text">
-           <string>TRUE</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ECCENTRIC</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>MEAN</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_e"/>
-       </item>
-       <item row="3" column="2">
-        <widget class="QSlider" name="horizontalSlider_2">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
-         </property>
-         <property name="tickInterval">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QSpinBox" name="set_anomaly">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_eccentricity">
-         <property name="text">
-          <string>Eccentricity</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <widget class="QSpinBox" name="set_raan">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="value">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_anomaly">
-         <property name="text">
-          <string>Anomaly</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_a"/>
-       </item>
-       <item row="5" column="2">
-        <widget class="QSlider" name="horizontalSlider_4">
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
-         </property>
-         <property name="tickInterval">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="create_sat">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Create Sat</string>
-      </property>
-      <property name="shortcut">
-       <string>Return</string>
       </property>
      </widget>
     </item>
@@ -314,7 +342,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>934</width>
+     <width>505</width>
      <height>22</height>
     </rect>
    </property>
