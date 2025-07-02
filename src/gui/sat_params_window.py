@@ -45,10 +45,19 @@ class SatParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             return
         
         # Define satellites
-        sat1 = Satellite(a, e, i, raan, omega, anomaly, date, 
-                         anomaly_type, label = sat_name)
+        sat_num = self.sat_chooser.currentIndex()
+        sat = Satellite(a, e, i, omega, raan, anomaly, date, anomaly_type, sat_name)
         
-        self.parent().sat1 = sat1
+        if sat_num == 0:
+            self.parent().sat0 = sat
+        elif sat_num == 1:
+            self.parent().sat1 = sat
+        elif sat_num == 2:
+            self.parent().sat2 = sat
+        elif sat_num == 3:
+            self.parent().sat3 = sat
+        elif sat_num == 4:
+            self.parent().sat4 = sat
         
         # Close window
         self.close()

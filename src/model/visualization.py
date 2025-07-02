@@ -1,10 +1,21 @@
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from pathlib import Path
 from scipy.spatial.transform import Rotation as R
 import src.model.satellite_utils as satellite_utils
 
+
+mpl.rcParams.update({
+    'text.color'       : 'white',
+    'axes.labelcolor'  : 'white',
+    'axes.titlecolor'  : 'white',
+    'xtick.color'      : 'white',
+    'ytick.color'      : 'white',
+    'legend.facecolor' : 'black',
+    'legend.edgecolor' : 'white'
+})
 
 def plot_ground_tracks(sat_names, times):
     """

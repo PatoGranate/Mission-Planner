@@ -35,6 +35,18 @@ class TimesWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "Invalid input", "Duration or Timestep are empty or not numerical")
             return
         
+        # Check that duration and timestep are positive
+        if duration <= 0 or timestep <= 0:
+            QtWidgets.QMessageBox.warning(self,
+            "Invalid input", "Duration and timestep must not be 0")
+            return
+        
+        # Check that timestep is smaller than duration
+        if timestep >= duration:
+            QtWidgets.QMessageBox.warning(self,
+            "Invalid input", "Duration must be greater than timestep")
+            return
+        
         # Check whether times are being created or edited
         parent = self.parent()
         if hasattr(parent, "date"):

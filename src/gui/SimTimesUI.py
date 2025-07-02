@@ -154,7 +154,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Simulation Times"))
         self.times_cancel.setText(_translate("MainWindow", "Cancel"))
         self.times_confirm.setText(_translate("MainWindow", "Confirm"))
         self.times_confirm.setShortcut(_translate("MainWindow", "Return"))

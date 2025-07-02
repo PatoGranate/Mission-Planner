@@ -4,7 +4,7 @@ sys.modules['icons_rc'] = src.gui.icons_rc
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 import matplotlib.pyplot as plt
 from src.gui.MainUI import Ui_MainWindow
 from src.gui.sat_params_window import SatParamsWindow
@@ -20,14 +20,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Initiate window
         super().__init__()
         self.setupUi(self)
-
+        
         # Creating canvas inside frame to plot graphs
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.graph_frame)
         self.horizontalLayout.setObjectName("horizontalLayout")
         
         self.figure = Figure(facecolor = "None")
         self.canvas = FigureCanvas(self.figure)
-        
         self.horizontalLayout.addWidget(self.canvas)
         # End of canvas
         
@@ -65,21 +64,37 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
     def run_project(self):
         # Check that a satellite has been defined, then run
-        try:
-            date = self.sat1
-        except AttributeError:
+        sat0 = getattr(self, 'sat0', None)
+        sat1 = getattr(self, 'sat1', None)
+        sat2 = getattr(self, 'sat2', None)
+        sat3 = getattr(self, 'sat3', None)
+        sat4 = getattr(self, 'sat4', None)
+        
+        self.sats = [s for s in [sat0, sat1, sat2, sat3, sat4] if s is not None]
+        if len(self.sats) == 0:
             QtWidgets.QMessageBox().warning(self, "Missing Satellite", 
                     "Please define one or more satellites first")
             return
         
         if self.vis_ops.currentIndex() == 0:
-            fig, _ = visualization.plot_ground_tracks([self.sat1], self.times)
+            fig, _ = visualization.plot_ground_tracks(self.sats, self.times)
             fig.patch.set_facecolor('none')
             self.update_canvas(fig)
+            
         elif self.vis_ops.currentIndex() == 1:
-            fig, _ = visualization.plot_orbits([self.sat1], self.times)
+            fig, _ = visualization.plot_orbits(self.sats, self.times)
             for ax in fig.axes:
                 ax.set_facecolor('none')
+            fig.patch.set_facecolor('none')
+            self.update_canvas(fig)
+        
+        elif self.vis_ops.currentIndex() == 2:
+            if len(self.sats) == 1:
+                QtWidgets.QMessageBox().warning(self, "Missing Satellite", 
+                        "More than one satellite is required for this plot")
+                return
+            tolerance = 3000000
+            fig, _ = visualization.plot_cross_sat(self.sats, self.times, tolerance)
             fig.patch.set_facecolor('none')
             self.update_canvas(fig)
 
@@ -88,7 +103,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     
     # 1) load the material theme
-    apply_stylesheet(app, theme="light_blue.xml")
+    apply_stylesheet(app, theme="dark_blue.xml")
     
     # 2) grab the theme’s QSS
     base_qss = app.styleSheet()
@@ -100,7 +115,7 @@ if __name__ == "__main__":
     }
     
     QPushButton:hover, QPushButton:focus {
-        background-color: rgba(0, 0, 255, 0.1) !important;
+        background-color: rgba(0, 0, 255, 0.2) !important;
     }
     
     /* hide all QFrame/QGroupBox borders */
@@ -122,7 +137,7 @@ if __name__ == "__main__":
     }
     
     QPushButton#run:hover, QPushButton#run:focus {
-        background-color: rgba(0, 170, 0, 0.1) !important;
+        background-color: rgba(0, 170, 0, 0.2) !important;
     }
     
     /* Change cancel buttons to be red */
@@ -133,7 +148,7 @@ if __name__ == "__main__":
     }
     
     QPushButton#sat_cancel:hover, QPushButton#sat_cancel:focus {
-        background-color: rgba(255, 0, 0, 0.1) !important;
+        background-color: rgba(255, 0, 0, 0.2) !important;
     }
     
     /* Change cancel buttons to be red */
@@ -144,7 +159,13 @@ if __name__ == "__main__":
     }
     
     QPushButton#times_cancel:hover, QPushButton#times_cancel:focus {
-        background-color: rgba(255, 0, 0, 0.1) !important;
+        background-color: rgba(255, 0, 0, 0.2) !important;
+    }
+    
+    
+    /* style all combo‐boxes with transparent bg, blue rounded border, centered & blue text */
+    QComboBox {
+        background-color: transparent !important;
     }
     """
     app.setStyleSheet(base_qss + override)
@@ -152,4 +173,18 @@ if __name__ == "__main__":
     w = MainWindow()
     w.show()
     app.exec_()
-
+    
+    """
+    QWidget#centralwidget {
+        background-image: url(:/icons/stars.png) !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+    }
+    
+    
+    QUEDA PENDIENTE AÑADIR FUNCIONALIDAD DE SIMULACIÓN, SOLUCIONAR LO DEL BACKGROUND
+    QUIZÁS CAMBIAR LOS COLORES DE LOS SATELITES PARA QUE SEAN MÁS CLAROS Y QUE 
+    ASÍ SE VEAN MEJOR EN CONTRASTE CON EL BACKGROUND OSCURO
+    """

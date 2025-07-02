@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Satellite Parameters</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -160,7 +160,75 @@
        <set>Qt::AlignCenter</set>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="9" column="2" colspan="2">
+       <item row="6" column="1">
+        <widget class="QSlider" name="horizontalSlider_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_epoch">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Sat Number</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QSlider" name="horizontalSlider_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1" colspan="2">
         <widget class="QLineEdit" name="set_sat_name">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -170,7 +238,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="label_omega">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -188,7 +256,23 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="7" column="2">
+        <widget class="QSpinBox" name="set_raan">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
         <widget class="QLabel" name="label_raan">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -206,7 +290,29 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="2" colspan="2">
+       <item row="8" column="1">
+        <widget class="QSlider" name="horizontalSlider_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximum">
+          <number>359</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
+         </property>
+         <property name="tickInterval">
+          <number>90</number>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" colspan="2">
         <widget class="QComboBox" name="set_anomaly_type">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -231,7 +337,7 @@
          </item>
         </widget>
        </item>
-       <item row="8" column="0">
+       <item row="9" column="0">
         <widget class="QLabel" name="label_anomaly_type">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -249,7 +355,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="label_inclination">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -267,7 +373,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="label_anomaly">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -286,24 +392,6 @@
         </widget>
        </item>
        <item row="10" column="0">
-        <widget class="QLabel" name="label_epoch">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>18</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Epoch</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0">
         <widget class="QLabel" name="label_sat_name">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -321,159 +409,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_a">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_epoch">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="inputMask">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2" colspan="2">
-        <widget class="QLineEdit" name="set_e">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_semi_major_axis">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>18</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Semi-major axis (km)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_eccentricity">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>18</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Eccentricity</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <widget class="QSpinBox" name="set_i">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimum">
-          <number>-90</number>
-         </property>
-         <property name="maximum">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QSpinBox" name="set_omega">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximum">
-          <number>359</number>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="3">
-        <widget class="QSpinBox" name="set_raan">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="value">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="3">
-        <widget class="QSpinBox" name="set_anomaly">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximum">
-          <number>359</number>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2">
-        <widget class="QSlider" name="horizontalSlider_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximum">
-          <number>359</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
-         </property>
-         <property name="tickInterval">
-          <number>90</number>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
+       <item row="5" column="1">
         <widget class="QSlider" name="horizontalSlider">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -504,10 +440,10 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
-        <widget class="QSlider" name="horizontalSlider_2">
+       <item row="6" column="2">
+        <widget class="QSpinBox" name="set_omega">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -515,24 +451,38 @@
          <property name="maximum">
           <number>359</number>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="QLineEdit" name="set_a">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QSpinBox" name="set_i">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <property name="tickInterval">
+         <property name="minimum">
+          <number>-90</number>
+         </property>
+         <property name="maximum">
           <number>90</number>
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
-        <widget class="QSlider" name="horizontalSlider_3">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+       <item row="8" column="2">
+        <widget class="QSpinBox" name="set_anomaly">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -540,18 +490,81 @@
          <property name="maximum">
           <number>359</number>
          </property>
-         <property name="value">
-          <number>0</number>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="QLineEdit" name="set_e">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_semi_major_axis">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <property name="tickPosition">
-          <enum>QSlider::TicksBelow</enum>
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
          </property>
-         <property name="tickInterval">
-          <number>90</number>
+         <property name="text">
+          <string>Semi-major axis (km)</string>
          </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_eccentricity">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Eccentricity</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="QComboBox" name="sat_chooser">
+         <item>
+          <property name="text">
+           <string>Sat 0 (Observer)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sat 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sat 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sat 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sat 4</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
@@ -612,7 +625,6 @@
   <tabstop>set_anomaly</tabstop>
   <tabstop>set_anomaly_type</tabstop>
   <tabstop>set_sat_name</tabstop>
-  <tabstop>set_epoch</tabstop>
   <tabstop>sat_cancel</tabstop>
   <tabstop>create_sat</tabstop>
  </tabstops>
