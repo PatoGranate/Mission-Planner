@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>Clock_icon_2.png</file>
+    <file>Run_icon_2.png</file>
+    <file>sat_icon.png</file>
+  </qresource>
+</RCC>

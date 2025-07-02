@@ -1,4 +1,7 @@
 import sys
+import src.gui.icons_rc
+sys.modules['icons_rc'] = src.gui.icons_rc
+
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5 import QtWidgets
@@ -6,8 +9,9 @@ import matplotlib.pyplot as plt
 from src.gui.MainUI import Ui_MainWindow
 from src.gui.sat_params_window import SatParamsWindow
 from src.gui.times_window import TimesWindow
-
+from PyQt5.QtWidgets import QSizePolicy
 import src.model.visualization as visualization
+
 
 plt.ioff()
 
@@ -32,7 +36,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.sim_timer.clicked.connect(self.open_times)
         self.run.clicked.connect(self.run_project)
         
-        
+                
     def open_sat(self):
         # Check that an epoch has been created before opening the sat window
         try:
@@ -81,28 +85,70 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 from qt_material import apply_stylesheet
 if __name__ == "__main__":
-    # If script is rund irectly open the main window
     app = QtWidgets.QApplication([])
     
-    # Override some of the style choices from the style sheet
-    apply_stylesheet(app, theme = "light_blue.xml")
-   
+    # 1) load the material theme
+    apply_stylesheet(app, theme="light_blue.xml")
+    
+    # 2) grab the theme’s QSS
     base_qss = app.styleSheet()
 
-    override = """
-    /* 1. force 14pt everywhere */
+    override = override = r"""
+    /* force 18pt everywhere */
     * {
-        font-size: 14pt !important;
+      font-size: 18pt !important;
     }
-
-    /* 2. hide all QFrame/QGroupBox borders */
+    
+    QPushButton:hover, QPushButton:focus {
+        background-color: rgba(0, 0, 255, 0.1) !important;
+    }
+    
+    /* hide all QFrame/QGroupBox borders */
     QFrame, QGroupBox {
-        border: none !important;
+      border: none !important;
+      background-color: transparent !important;
+    }
+    
+    /* make sure icons actually draw at a reasonable size */
+    QPushButton, QToolButton {
+      qproperty-iconSize: 60px 60px !important;
+    }
+    
+    /* only run button goes green */
+    QPushButton#run {
+      color: rgb(0, 170, 0) !important;
+      border: 2px solid rgb(0, 170, 0) !important;
+      background-color: transparent !important;
+    }
+    
+    QPushButton#run:hover, QPushButton#run:focus {
+        background-color: rgba(0, 170, 0, 0.1) !important;
+    }
+    
+    /* Change cancel buttons to be red */
+    QPushButton#sat_cancel {
+        color: rgb(255, 0, 0) !important;
+        border: 2px solid rgb(255, 0, 0) !important;
         background-color: transparent !important;
+    }
+    
+    QPushButton#sat_cancel:hover, QPushButton#sat_cancel:focus {
+        background-color: rgba(255, 0, 0, 0.1) !important;
+    }
+    
+    /* Change cancel buttons to be red */
+    QPushButton#times_cancel {
+        color: rgb(255, 0, 0) !important;
+        border: 2px solid rgb(255, 0, 0) !important;
+        background-color: transparent !important;
+    }
+    
+    QPushButton#times_cancel:hover, QPushButton#times_cancel:focus {
+        background-color: rgba(255, 0, 0, 0.1) !important;
     }
     """
     app.setStyleSheet(base_qss + override)
-    
+    #app.setStyleSheet("")
     w = MainWindow()
     w.show()
     app.exec_()

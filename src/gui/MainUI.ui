@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
-    <height>375</height>
+    <width>731</width>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,29 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
+    <item row="0" column="1">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Simulation</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
      <widget class="QGroupBox" name="simulation">
       <property name="font">
        <font>
@@ -44,24 +66,7 @@
        <property name="spacing">
         <number>12</number>
        </property>
-       <item row="4" column="2">
-        <widget class="QPushButton" name="run">
-         <property name="text">
-          <string>Run</string>
-         </property>
-         <property name="shortcut">
-          <string>Ctrl+Return</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="sim_timer">
-         <property name="text">
-          <string>Simulation Timer</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="3">
+       <item row="1" column="1" rowspan="5" colspan="2">
         <widget class="QFrame" name="graph_frame">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -71,63 +76,198 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="new_sat">
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
+       <item row="5" column="0">
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="text">
-          <string>New Sat</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="vis_ops">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <item>
+             <property name="text">
+              <string>Ground Tracks</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Earth Vis</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Animation</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Distances</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="3" column="0" colspan="3">
-        <widget class="QComboBox" name="vis_ops">
-         <item>
-          <property name="text">
-           <string>Ground Tracks</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Earth Vis</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Animation</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Distances</string>
-          </property>
-         </item>
+       <item row="1" column="0" rowspan="4">
+        <widget class="QFrame" name="frame_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="2" column="0">
+           <widget class="QPushButton" name="new_sat">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>New Sat    </string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons.qrc">
+              <normaloff>:/icons/sat_icon.png</normaloff>:/icons/sat_icon.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="sim_timer">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Sim Time   </string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons.qrc">
+              <normaloff>:/icons/Clock_icon_2.png</normaloff>:/icons/Clock_icon_2.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="run">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>170</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>0</red>
+                  <green>0</green>
+                  <blue>0</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="ButtonText">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>120</red>
+                  <green>120</green>
+                  <blue>120</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Run            </string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons.qrc">
+              <normaloff>:/icons/Run_icon_2.png</normaloff>:/icons/Run_icon_2.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+Return</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Simulation</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
      </widget>
     </item>
    </layout>
@@ -137,13 +277,21 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>508</width>
+     <width>731</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <tabstops>
+  <tabstop>sim_timer</tabstop>
+  <tabstop>new_sat</tabstop>
+  <tabstop>run</tabstop>
+  <tabstop>vis_ops</tabstop>
+ </tabstops>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

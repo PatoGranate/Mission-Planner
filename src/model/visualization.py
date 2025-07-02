@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+from pathlib import Path
 from scipy.spatial.transform import Rotation as R
 import src.model.satellite_utils as satellite_utils
+
 
 def plot_ground_tracks(sat_names, times):
     """
@@ -24,7 +26,11 @@ def plot_ground_tracks(sat_names, times):
     """
     fig = plt.figure()
     ax = fig.add_subplot()
-    earth_map = plt.imread('imgs/earth_outline.png')
+    
+    project_root = Path(__file__).resolve().parents[2]
+    img_path = project_root / "imgs" / "earth_outline.png"
+    earth_map = plt.imread(str(img_path))
+    
     ax.imshow(earth_map, extent=[-180, 180, -90, 90], origin='upper', aspect='equal')
     
     ax.set_xlim([-180, 180])
