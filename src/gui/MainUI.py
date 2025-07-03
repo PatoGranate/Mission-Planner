@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1800, 700)
+        MainWindow.resize(798, 613)
         MainWindow.setMinimumSize(QtCore.QSize(600, 400))
         MainWindow.setAutoFillBackground(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -183,7 +183,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.simulation, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1800, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 798, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -200,7 +200,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Simulation Home"))
-        self.label.setText(_translate("MainWindow", "Simulation"))
+        self.label.setText(_translate("MainWindow", "Orekit Mission Planner"))
         self.sim_timer.setText(_translate("MainWindow", "Sim Time   "))
         self.run.setText(_translate("MainWindow", "Run            "))
         self.run.setShortcut(_translate("MainWindow", "Ctrl+Return"))

@@ -43,7 +43,7 @@
           <item row="3" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_e2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -61,14 +61,14 @@
              </font>
             </property>
             <property name="text">
-             <string>i</string>
+             <string>i (deg)</string>
             </property>
            </widget>
           </item>
           <item row="12" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_anom_type3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -94,7 +94,7 @@
           <item row="8" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_omega4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -107,7 +107,7 @@
           <item row="1" column="7">
            <widget class="QLineEdit" name="info_display_name2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -120,7 +120,7 @@
           <item row="3" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_e0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -133,7 +133,7 @@
           <item row="9" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_raan2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -146,7 +146,7 @@
           <item row="2" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_a1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -165,7 +165,7 @@
           <item row="3" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_e3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -191,7 +191,7 @@
           <item row="8" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_omega3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -204,7 +204,7 @@
           <item row="5" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_i3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -222,14 +222,14 @@
              </font>
             </property>
             <property name="text">
-             <string>raan</string>
+             <string>raan (deg)</string>
             </property>
            </widget>
           </item>
           <item row="11" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_anom4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -260,14 +260,14 @@
              </font>
             </property>
             <property name="text">
-             <string>anom</string>
+             <string>anom (deg)</string>
             </property>
            </widget>
           </item>
           <item row="5" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_i4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -292,7 +292,7 @@
           <item row="1" column="11">
            <widget class="QLineEdit" name="info_display_name4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -310,7 +310,7 @@
              </font>
             </property>
             <property name="text">
-             <string>omega</string>
+             <string>omega (deg)</string>
             </property>
            </widget>
           </item>
@@ -329,7 +329,7 @@
           <item row="1" column="5">
            <widget class="QLineEdit" name="info_display_name1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -342,7 +342,7 @@
           <item row="9" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_raan3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -355,7 +355,7 @@
           <item row="12" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_anom_type2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -368,7 +368,7 @@
           <item row="8" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_omega1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -381,7 +381,7 @@
           <item row="12" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_anom_type4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -394,7 +394,7 @@
           <item row="11" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_anom0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -407,7 +407,7 @@
           <item row="2" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_a3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -426,7 +426,7 @@
           <item row="9" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_raan0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -439,7 +439,7 @@
           <item row="11" column="8" colspan="2">
            <widget class="QLineEdit" name="info_display_anom3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -452,7 +452,7 @@
           <item row="8" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_omega0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -465,7 +465,7 @@
           <item row="3" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_e1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -478,7 +478,7 @@
           <item row="9" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_raan4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -491,7 +491,7 @@
           <item row="11" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_anom1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -504,7 +504,7 @@
           <item row="1" column="9">
            <widget class="QLineEdit" name="info_display_name3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -517,7 +517,7 @@
           <item row="2" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_a0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -536,7 +536,7 @@
           <item row="5" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_i2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -562,7 +562,7 @@
           <item row="8" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_omega2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -575,7 +575,7 @@
           <item row="3" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_e4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -588,7 +588,7 @@
           <item row="12" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_anom_type1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -601,7 +601,7 @@
           <item row="2" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_a2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -620,7 +620,7 @@
           <item row="2" column="10" colspan="2">
            <widget class="QLineEdit" name="info_display_a4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -639,7 +639,7 @@
           <item row="11" column="6" colspan="2">
            <widget class="QLineEdit" name="info_display_anom2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -652,7 +652,7 @@
           <item row="12" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_anom_type0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -678,7 +678,7 @@
           <item row="5" column="1" colspan="2">
            <widget class="QLineEdit" name="info_display_i0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -691,7 +691,7 @@
           <item row="1" column="2">
            <widget class="QLineEdit" name="info_display_name0">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -704,7 +704,7 @@
           <item row="5" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_i1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -717,7 +717,7 @@
           <item row="9" column="4" colspan="2">
            <widget class="QLineEdit" name="info_display_raan1">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string/>
@@ -735,7 +735,7 @@
              </font>
             </property>
             <property name="text">
-             <string>a</string>
+             <string>a (m)</string>
             </property>
            </widget>
           </item>
@@ -780,7 +780,7 @@
           <item row="2" column="5">
            <widget class="QLineEdit" name="info_display_timestep">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -834,7 +834,7 @@
           <item row="2" column="2">
            <widget class="QLineEdit" name="info_display_duration">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -885,7 +885,7 @@
        <item row="0" column="3">
         <widget class="QDateTimeEdit" name="info_display_date">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="font">
           <font>

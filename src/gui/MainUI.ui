@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>731</width>
-    <height>494</height>
+    <width>798</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -48,7 +48,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Simulation</string>
+       <string>Orekit Mission Planner</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -371,7 +371,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>731</width>
+     <width>798</width>
      <height>22</height>
     </rect>
    </property>

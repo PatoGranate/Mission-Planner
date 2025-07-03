@@ -10,7 +10,7 @@ from src.gui.MainUI import Ui_MainWindow
 from src.gui.sat_params_window import SatParamsWindow
 from src.gui.times_window import TimesWindow
 from src.gui.sat_info_window import SatInfoWindow
-from PyQt5.QtWidgets import QSizePolicy
+
 import src.model.visualization as visualization
 
 
@@ -218,16 +218,16 @@ if __name__ == "__main__":
     
     
     /* LABEL EDITS*/
-    /* set label font size to 20pt */
+    /* set label font size to 16pt */
     QLabel{
-        font-size: 20pt !important
+        font-size: 16pt !important
     }
     
     
     /* MISC EDITS */
     /* make sure icons actually draw at a reasonable size */
     QPushButton, QToolButton {
-      qproperty-iconSize: 60px 60px !important;
+      qproperty-iconSize: 80px 80px !important;
     }
     
     /* style all combo‐boxes with transparent bg, blue rounded border, centered & blue text */
@@ -242,8 +242,15 @@ if __name__ == "__main__":
       background-color: transparent !important;
     }
     
+    QProgressBar#simulation_progress {
+    background-color: rgba(255, 255, 255, 20);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    }
     
     
+    /* BACKGROUND EDITS */
     QWidget#centralwidget {
         background-image: url(:/icons/stars.png) !important;
         background-repeat: no-repeat !important;
@@ -262,4 +269,15 @@ if __name__ == "__main__":
     """
     CAMBIAR LOS COLORES DE LOS SATELITES PARA QUE SEAN MÁS CLAROS Y QUE 
     ASÍ SE VEAN MEJOR EN CONTRASTE CON EL BACKGROUND OSCURO
+    
+    AÑADIR LA FUNCIONALIDAD DE VER LA DURATION TIMESTEP Y EPOCH EN SAT INFO
+    
+    METER LA FUNCIONALIDAD DE QUE SE PUEDA PARAR LA ANIMACION Y QUE PUEDAS
+    ESCROLEAR EN LA PROGRESSBAR (O QUE ALTERNATIVAMENTE TE DEJE IR PARA ATRAS
+                                 Y PARA ADELANTE CON OTROS BOTONES)
+    
+    QUIZÁS MIRAR COMO QUITAR LA CUADRICULA QUE SALE EN LOS 3D PLOTS Y ASÍ DEJAR
+    EL MUNDO Y LOS SATELITES SOLOS. 
+    
+    MIRAR SI SE PUEDE HACER ZOOM EN EL CANVAS
     """
