@@ -3,17 +3,27 @@ import src.gui.icons_rc
 sys.modules['icons_rc'] = src.gui.icons_rc
 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as BaseCanvas
 from PyQt5 import QtWidgets, QtCore
 import matplotlib.pyplot as plt
 from src.gui.MainUI import Ui_MainWindow
 from src.gui.sat_params_window import SatParamsWindow
 from src.gui.times_window import TimesWindow
+from src.gui.sat_info_window import SatInfoWindow
 from PyQt5.QtWidgets import QSizePolicy
 import src.model.visualization as visualization
 
 
 plt.ioff()
+
+class TransparentCanvas(BaseCanvas):
+    def __init__(self, figure):
+        super().__init__(figure)
+        self.setAutoFillBackground(False)
+        self.setAttribute(QtCore.Qt.WA_NoSystemBackground, True)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
+        self.setStyleSheet("background: transparent;")
+
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -26,7 +36,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.horizontalLayout.setObjectName("horizontalLayout")
         
         self.figure = Figure(facecolor = "None")
-        self.canvas = FigureCanvas(self.figure)
+        self.figure.patch.set_alpha(0)
+        self.canvas = TransparentCanvas(self.figure)
         self.horizontalLayout.addWidget(self.canvas)
         # End of canvas
         
@@ -34,6 +45,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.new_sat.clicked.connect(self.open_sat)
         self.sim_timer.clicked.connect(self.open_times)
         self.run.clicked.connect(self.run_project)
+        self.sat_info.clicked.connect(self.open_info)
         
                 
     def open_sat(self):
@@ -54,12 +66,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timesWin = TimesWindow(self)
         self.timesWin.show()
         
-    def update_canvas(self, fig):
-        self.horizontalLayout.removeWidget(self.canvas)
-        self.canvas.setParent(None)
+    def open_info(self):
+        # Open satellite information window
+        self.sat_infoWin = SatInfoWindow(self)
+        self.sat_infoWin.show()
         
-        self.canvas = FigureCanvas(fig)
-        self.horizontalLayout.addWidget(self.canvas)
+    def update_canvas(self, fig):
+        fig.patch.set_facecolor("none")
+        fig.patch.set_alpha(0)
+        
+        for ax in fig.axes:
+            ax.patch.set_facecolor("none")
+            ax.patch.set_alpha(0)
+           
+        new_canvas = TransparentCanvas(fig)
+        self.horizontalLayout.replaceWidget(self.canvas, new_canvas)
+        self.canvas.setParent(None)
+        self.canvas = new_canvas
+        
         self.canvas.draw()
         
     def run_project(self):
@@ -109,24 +133,23 @@ if __name__ == "__main__":
     base_qss = app.styleSheet()
 
     override = override = r"""
-    /* force 18pt everywhere */
+    /* GENERAL EDITS */
     * {
-      font-size: 18pt !important;
+      font-size: 16pt !important;
     }
     
+    
+    /* BUTTON EDITS */
+    /* change button font sizes to be bigger */
+    QPushButton{
+        font-size:20pt !important;
+        background-color: transparent !important;
+    }
+    
+    /* add hover effects to buttons */
     QPushButton:hover, QPushButton:focus {
         background-color: rgba(0, 0, 255, 0.2) !important;
-    }
-    
-    /* hide all QFrame/QGroupBox borders */
-    QFrame, QGroupBox {
-      border: none !important;
-      background-color: transparent !important;
-    }
-    
-    /* make sure icons actually draw at a reasonable size */
-    QPushButton, QToolButton {
-      qproperty-iconSize: 60px 60px !important;
+        font-size: 21pt !important;
     }
     
     /* only run button goes green */
@@ -163,11 +186,42 @@ if __name__ == "__main__":
     }
     
     
+    /* LABEL EDITS*/
+    /* set label font size to 20pt */
+    QLabel{
+        font-size: 20pt !important
+    }
+    
+    
+    /* MISC EDITS */
+    /* make sure icons actually draw at a reasonable size */
+    QPushButton, QToolButton {
+      qproperty-iconSize: 60px 60px !important;
+    }
+    
     /* style all combo‐boxes with transparent bg, blue rounded border, centered & blue text */
     QComboBox {
         background-color: transparent !important;
+        font-size: 20pt !important
+    }
+    
+    /* hide all QFrame/QGroupBox borders */
+    QFrame, QGroupBox {
+      border: none !important;
+      background-color: transparent !important;
+    }
+    
+    
+    
+    QWidget#centralwidget {
+        background-image: url(:/icons/stars.png) !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
+        border-image: url(:/icons/stars.png) 0 0 0 0 stretch stretch;
     }
     """
+    
     app.setStyleSheet(base_qss + override)
     #app.setStyleSheet("")
     w = MainWindow()
@@ -175,13 +229,7 @@ if __name__ == "__main__":
     app.exec_()
     
     """
-    QWidget#centralwidget {
-        background-image: url(:/icons/stars.png) !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-attachment: fixed !important;
-        background-size: cover !important;
-    }
+
     
     
     QUEDA PENDIENTE AÑADIR FUNCIONALIDAD DE SIMULACIÓN, SOLUCIONAR LO DEL BACKGROUND
