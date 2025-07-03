@@ -100,9 +100,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     "Please define one or more satellites first")
             return
         
+        if getattr(self, "anim", None):
+            try:
+                self.anim.event_source.stop()
+            except Exception:
+                pass
+            self.simulation_progress.reset()
+        
         if self.vis_ops.currentIndex() == 0:
             fig, _ = visualization.plot_ground_tracks(self.sats, self.times)
-            fig.patch.set_facecolor('none')
             self.update_canvas(fig)
             
         elif self.vis_ops.currentIndex() == 1:
@@ -121,6 +127,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             fig, _ = visualization.plot_cross_sat(self.sats, self.times, tolerance)
             fig.patch.set_facecolor('none')
             self.update_canvas(fig)
+            
+        elif self.vis_ops.currentIndex() == 3:
+                
+            tolerance = 3000000
+            self.anim = visualization.animate_sat_attitude(self.sats, 
+                self.times, tolerance, progress_callback = self.progress_callback)
+            fig = self.anim._fig
+            fig.patch.set_color('none')
+            for ax in fig.axes:
+                ax.set_facecolor('none')
+            fig.patch.set_facecolor('none')
+            
+            self.update_canvas(fig)
+            
+            self.anim._init_draw()
+            old_timer = self.anim.event_source
+            new_timer = self.canvas.new_timer(interval = old_timer.interval)
+            new_timer.add_callback(self.anim._step)
+            self.anim.event_source = new_timer
+            
+            new_timer.start()
+
+    def progress_callback(self, i, N):
+        self.simulation_progress.setMaximum(N-1)
+        self.simulation_progress.setValue(i)
 
 from qt_material import apply_stylesheet
 if __name__ == "__main__":
@@ -229,10 +260,6 @@ if __name__ == "__main__":
     app.exec_()
     
     """
-
-    
-    
-    QUEDA PENDIENTE AÑADIR FUNCIONALIDAD DE SIMULACIÓN, SOLUCIONAR LO DEL BACKGROUND
-    QUIZÁS CAMBIAR LOS COLORES DE LOS SATELITES PARA QUE SEAN MÁS CLAROS Y QUE 
+    CAMBIAR LOS COLORES DE LOS SATELITES PARA QUE SEAN MÁS CLAROS Y QUE 
     ASÍ SE VEAN MEJOR EN CONTRASTE CON EL BACKGROUND OSCURO
     """

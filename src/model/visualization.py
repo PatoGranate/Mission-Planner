@@ -152,7 +152,7 @@ def plot_cross_sat(sat_names, times, tolerance):
     
     return fig, ax
 
-def animate_sat_attitude(sat_names, times, tolerance, interval = 100):
+def animate_sat_attitude(sat_names, times, tolerance, interval = 100, progress_callback = None):
     """
     Animate satellite objects and attitude frames around orbits
     
@@ -215,11 +215,18 @@ def animate_sat_attitude(sat_names, times, tolerance, interval = 100):
             else:
                 x, y, z = traj[frame]
                 m._offsets3d = ([x], [y], [z])
- 
+                
         ax.set_title(f"Time elapsed: {times[frame]:.0f}s")
+        
+        if progress_callback is not None:
+            progress_callback(frame, len(times))
+            
+        if frame == len(times) - 1:
+            anim.event_source.stop()
+            
         return (*markers, quiver)
     
     anim = FuncAnimation(fig, update, frames = len(times),
-                         interval = interval, blit = False)
+                         interval = interval, repeat = False, blit = False)
     
     return anim   
