@@ -11,6 +11,29 @@ class SatParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.create_sat.clicked.connect(self.sat_create)
         self.actionReset.triggered.connect(self.reset)
         
+        try: 
+            self.parent().sat0
+            self.sat_chooser.setCurrentIndex(1)
+            try:
+                self.parent().sat1
+                self.sat_chooser.setCurrentIndex(2)
+                try:
+                    self.parent().sat2
+                    self.sat_chooser.setCurrentIndex(3)
+                    try:
+                        self.parent().sat3
+                        self.sat_chooser.setCurrentIndex(4)
+                    except AttributeError:
+                        pass
+                except AttributeError:
+                    pass
+            except AttributeError:
+                pass
+        except AttributeError:
+            pass
+                
+                        
+        
     def sat_create(self):
         # Take user inputs
         a_input = self.set_a.text()

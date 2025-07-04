@@ -53,7 +53,7 @@ class TimesWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             reply = QtWidgets.QMessageBox.question(
                 self,
                 "New times?",
-                "Defining a new simualtion time will delete the existing satellites. Continue?",
+                "The new simulation time will be applied to all satellites, continue?",
                 QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No
             )
             if reply != QtWidgets.QMessageBox.Yes:

@@ -44,10 +44,13 @@ def plot_ground_tracks(sat_names, times):
     ax = fig.add_subplot()
     
     project_root = Path(__file__).resolve().parents[2]
-    img_path = project_root / "imgs" / "earth_outline.png"
+    img_path = project_root / "imgs" / "earth_outline_gray.png"
     earth_map = plt.imread(str(img_path))
     
     ax.imshow(earth_map, extent=[-180, 180, -90, 90], origin='upper', aspect='equal')
+    
+    for spine in ax.spines.values():
+        spine.set_edgecolor("#E6E6E6")
     
     ax.set_xlim([-180, 180])
     ax.set_ylim([-90, 90])
@@ -96,13 +99,15 @@ def plot_orbits(sat_names, times):
 
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
-    ax.plot_wireframe(X, Y, Z, color='#E6E6E6', alpha=0.5, linewidth=0.5)
+    eline = ax.plot_wireframe(X, Y, Z, color='#E6E6E6', alpha=0.7, linewidth=0.5)
+    eline.set_clip_on(False)
     
     max_extent = 0
     for i in range(len(sat_names)):
         trajectory = sat_names[i].propagate(times)
-        ax.plot(trajectory[:,0], trajectory[:,1], trajectory[:,2], 
-                 linewidth=2, label = sat_names[i].label)
+        line, = ax.plot(trajectory[:,0], trajectory[:,1], trajectory[:,2], 
+                           linewidth=2, label = sat_names[i].label)
+        line.set_clip_on(False)
         
         current_max = max(abs(trajectory[:,0]).max(), 
                           abs(trajectory[:,1]).max(), 
@@ -191,11 +196,13 @@ def animate_sat_attitude(sat_names, times, tolerance, interval = 100, progress_c
         x0, y0, z0 = traj[0]
         m = ax.scatter(x0, y0, z0, s=200, label=sat.label)
         markers.append(m)
+        m.set_clip_on(False)
     
     obs_x0, obs_y0, obs_z0 = trajectories[0][0]
     quiver = ax.quiver([obs_x0]*3, [obs_y0]*3, [obs_z0]*3,    
                        [1,0,0], [0,1,0], [0,0,1], length=1.5e6, 
-                       normalize = True, color = ['b', 'g', 'r'])
+                       normalize = True, color = ['#E6E6E6', 'w', 'w'])
+    quiver.set_clip_on(False)
     
     def update(frame):
         nonlocal quiver
@@ -215,7 +222,8 @@ def animate_sat_attitude(sat_names, times, tolerance, interval = 100, progress_c
                     [x_obs]*3,
                     [y_obs]*3,
                     [z_obs]*3,   
-                    U, V, W, length=1.5e6, normalize = True, color = ['b', 'g', 'r'])
+                    U, V, W, length=1.5e6, normalize = True, color = ['#E6E6E6', 'w', 'w'])
+                quiver.set_clip_on(False)
                 
             else:
                 x, y, z = traj[frame]
