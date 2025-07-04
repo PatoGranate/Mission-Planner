@@ -59,6 +59,11 @@ class TimesWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             if reply != QtWidgets.QMessageBox.Yes:
                 return
         
+        # Save duration, timestep and date for labelling in SatInfo window
+        parent.duration = duration
+        parent.timestep = timestep
+        parent.epoch = datetime_input
+        
         # Generate epoch and times
         date = [year, month, day, hour, minute, second]
         times = get_times(duration, timestep)

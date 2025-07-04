@@ -10,6 +10,7 @@ from src.gui.MainUI import Ui_MainWindow
 from src.gui.sat_params_window import SatParamsWindow
 from src.gui.times_window import TimesWindow
 from src.gui.sat_info_window import SatInfoWindow
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 import src.model.visualization as visualization
 
@@ -38,6 +39,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.figure = Figure(facecolor = "None")
         self.figure.patch.set_alpha(0)
         self.canvas = TransparentCanvas(self.figure)
+
         self.horizontalLayout.addWidget(self.canvas)
         # End of canvas
         
@@ -47,7 +49,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.run.clicked.connect(self.run_project)
         self.sat_info.clicked.connect(self.open_info)
         
-                
+        
     def open_sat(self):
         # Check that an epoch has been created before opening the sat window
         try:
@@ -115,6 +117,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             fig, _ = visualization.plot_orbits(self.sats, self.times)
             for ax in fig.axes:
                 ax.set_facecolor('none')
+                ax.set_axis_off()
+                
             fig.patch.set_facecolor('none')
             self.update_canvas(fig)
         
@@ -129,7 +133,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.update_canvas(fig)
             
         elif self.vis_ops.currentIndex() == 3:
-                
             tolerance = 3000000
             self.anim = visualization.animate_sat_attitude(self.sats, 
                 self.times, tolerance, progress_callback = self.progress_callback)
@@ -137,6 +140,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             fig.patch.set_color('none')
             for ax in fig.axes:
                 ax.set_facecolor('none')
+                ax.set_axis_off()
             fig.patch.set_facecolor('none')
             
             self.update_canvas(fig)
@@ -236,6 +240,12 @@ if __name__ == "__main__":
         font-size: 20pt !important
     }
     
+    /* resize combo boxes in sat_params*/
+    QComboBox#sat_chooser, QComboBox#set_anomaly_type{
+        font-size: 16pt !important
+    }
+    
+    
     /* hide all QFrame/QGroupBox borders */
     QFrame, QGroupBox {
       border: none !important;
@@ -267,11 +277,6 @@ if __name__ == "__main__":
     app.exec_()
     
     """
-    CAMBIAR LOS COLORES DE LOS SATELITES PARA QUE SEAN MÁS CLAROS Y QUE 
-    ASÍ SE VEAN MEJOR EN CONTRASTE CON EL BACKGROUND OSCURO
-    
-    AÑADIR LA FUNCIONALIDAD DE VER LA DURATION TIMESTEP Y EPOCH EN SAT INFO
-    
     METER LA FUNCIONALIDAD DE QUE SE PUEDA PARAR LA ANIMACION Y QUE PUEDAS
     ESCROLEAR EN LA PROGRESSBAR (O QUE ALTERNATIVAMENTE TE DEJE IR PARA ATRAS
                                  Y PARA ADELANTE CON OTROS BOTONES)

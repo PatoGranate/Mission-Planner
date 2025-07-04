@@ -5,7 +5,7 @@ from matplotlib.animation import FuncAnimation
 from pathlib import Path
 from scipy.spatial.transform import Rotation as R
 import src.model.satellite_utils as satellite_utils
-
+from cycler import cycler
 
 mpl.rcParams.update({
     'text.color'       : 'white',
@@ -16,6 +16,11 @@ mpl.rcParams.update({
     'legend.facecolor' : 'black',
     'legend.edgecolor' : 'white'
 })
+
+my_colors = ['#00FEFC', '#FF2603', '#00FF00', '#FFF01F', '#BF00FF']  # e.g. red, blue, green, purple, orange
+
+# Tell Matplotlib to use this cycle for all plots:
+plt.rcParams['axes.prop_cycle'] = cycler(color=my_colors)
 
 def plot_ground_tracks(sat_names, times):
     """
@@ -78,7 +83,7 @@ def plot_orbits(sat_names, times):
         3D axes configured for orbit propagation
     """
     R_earth = 6.378e6
-    n_lon = 60
+    n_lon = 59
     n_lat = 30
 
     longitudes = np.linspace(0, 2*np.pi, n_lon)
@@ -91,7 +96,7 @@ def plot_orbits(sat_names, times):
 
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
-    ax.plot_wireframe(X, Y, Z, color='black', alpha=0.5, linewidth=0.5)
+    ax.plot_wireframe(X, Y, Z, color='#E6E6E6', alpha=0.5, linewidth=0.5)
     
     max_extent = 0
     for i in range(len(sat_names)):
