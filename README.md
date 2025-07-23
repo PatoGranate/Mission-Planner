@@ -24,7 +24,7 @@ A satellite mission planning application developed in Python with a full custom 
 ## 📷 Screenshots
 
 ### Ground Track View
-[Ground Track Map](assets/ground_track_view.png)
+![Ground Track Map](assets/ground_track_view.png)
 
 ### 3D Orbit View
 ![3D Plot](assets/orbit_view.png)
