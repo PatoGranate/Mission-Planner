@@ -32,8 +32,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Initiate window
         super().__init__()
         self.setupUi(self)
-        self.tolerance = 3000000
-        self.tolerance2 = 1000000
+        self.tolerance = 3000000 # From sat to sat
+        self.tolerance2 = 1000000 # From sat to gs
         
         # Creating canvas inside frame to plot graphs
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.graph_frame)

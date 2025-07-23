@@ -67,7 +67,7 @@ class GSParamsWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # If South or East, deg in negative
         if latlet == "S":
             latnum = float(latnum) * (-1)
-        if lonlet == "E":
+        if lonlet == "W":
             lonnum = float(lonnum) * (-1)
             
         # Ensure altitude is numerical and above 0
