@@ -4,11 +4,9 @@ A satellite mission planning application developed in Python with a full custom 
 
 ---
 
-## 🎥 Demo
+## 🎥 Watch the Demo
 
-https://github.com/PatoGranate/Mission-Planner/assets/demo.mp4
-
-> If the video does not autoplay, [click here to download or view it](https://raw.githubusercontent.com/PatoGranate/Mission-Planner/main/assets/demo.mp4)
+[![](assets/custom_thumbnail.png)](https://www.youtube.com/watch?v=z2VOJ-yZnIg&autoplay=1)
 
 ---
 
@@ -25,9 +23,14 @@ https://github.com/PatoGranate/Mission-Planner/assets/demo.mp4
 
 ## 📷 Screenshots
 
-| Satellite Information | 3D Orbit View | Ground Track View |
-|-----------------------|---------------|-------------------|
-| ![Satellite Information UI](assets/sat_params.png) | ![3D Plot](assets/orbit_view.png) | ![Ground Track Map](assets/ground_track_view.png) |
+### Ground Track View
+[Ground Track Map](assets/ground_track_view.png)
+
+### 3D Orbit View
+![3D Plot](assets/orbit_view.png)
+
+### Satellite Information
+![Satellite Information UI](assets/sat_params.png)
 
 > Additional images show functionality with up to 5 ground stations and satellites simultaneously.
 
