@@ -17,6 +17,5 @@ from src.gui.main_window import main
 if __name__ == "__main__":
     main()
 
-#%cd "C:/Users/pelay/OneDrive - University of Bath/Experiences/SuperSharp/Project"
 #cd "C:\Users\pelay\OneDrive - University of Bath\Experiences\SuperSharp\Project"
 #cd "C:\Users\pelay\OneDrive - University of Bath\Experiences\SuperSharp\Project\src\gui"
